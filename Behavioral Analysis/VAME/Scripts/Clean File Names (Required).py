@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 # Working Path
-working_directory = Path("C:/Users/kaiwi/OneDrive/Documents/VAME/data/")
+working_directory = Path("C:/Users/Username/OneDrive/Documents/VAME/data/")
 
 # Remove Strings that Cause Mismatch of CSV and MP4 Files
 for file_path in working_directory.glob("*.mp4"):

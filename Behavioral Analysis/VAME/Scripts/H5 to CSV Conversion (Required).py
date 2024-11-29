@@ -19,7 +19,7 @@ def convert_h5_to_csv(directory_path):
             print(f"Error converting {h5_file}: {e}")
 
 # Call Function
-directory_path = 'C:/Users/kaiwi/OneDrive/Documents/VAME/data'
+directory_path = 'C:/Users/Username/OneDrive/Documents/VAME/data'
 convert_h5_to_csv(directory_path)
 
 # Source: Chat GPT + Previous Script
