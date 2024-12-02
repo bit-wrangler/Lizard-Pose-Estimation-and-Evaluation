@@ -1,0 +1,1214 @@
+2024-10-10 21:50:54 Training with configuration:
+2024-10-10 21:50:54 data:
+2024-10-10 21:50:54   colormode: RGB
+2024-10-10 21:50:54   inference:
+2024-10-10 21:50:54     normalize_images: True
+2024-10-10 21:50:54   train:
+2024-10-10 21:50:54     affine:
+2024-10-10 21:50:54       p: 0.5
+2024-10-10 21:50:54       rotation: 30
+2024-10-10 21:50:54       scaling: [1.0, 1.0]
+2024-10-10 21:50:54       translation: 0
+2024-10-10 21:50:54     collate:
+2024-10-10 21:50:54       type: ResizeFromDataSizeCollate
+2024-10-10 21:50:54       min_scale: 0.4
+2024-10-10 21:50:54       max_scale: 1.0
+2024-10-10 21:50:54       min_short_side: 128
+2024-10-10 21:50:54       max_short_side: 1152
+2024-10-10 21:50:54       multiple_of: 32
+2024-10-10 21:50:54       to_square: False
+2024-10-10 21:50:54     covering: False
+2024-10-10 21:50:54     gaussian_noise: 12.75
+2024-10-10 21:50:54     hist_eq: False
+2024-10-10 21:50:54     motion_blur: False
+2024-10-10 21:50:54     normalize_images: True
+2024-10-10 21:50:54 device: auto
+2024-10-10 21:50:54 metadata:
+2024-10-10 21:50:54   project_path: /storage/ice1/0/2/rwang753/week8/20_videos_0603-RW-2024-10-10
+2024-10-10 21:50:54   pose_config_path: /storage/ice1/0/2/rwang753/week8/20_videos_0603-RW-2024-10-10/dlc-models-pytorch/iteration-0/20_videos_0603Oct10-trainset95shuffle1/train/pose_cfg.yaml
+2024-10-10 21:50:54   bodyparts: ['head', 'spine1', 'spine2', 'tail', 'feet1', 'feet2']
+2024-10-10 21:50:54   unique_bodyparts: []
+2024-10-10 21:50:54   individuals: ['animal']
+2024-10-10 21:50:54   with_identity: None
+2024-10-10 21:50:54 method: bu
+2024-10-10 21:50:54 model:
+2024-10-10 21:50:54   backbone:
+2024-10-10 21:50:54     type: ResNet
+2024-10-10 21:50:54     model_name: resnet50_gn
+2024-10-10 21:50:54     output_stride: 16
+2024-10-10 21:50:54     freeze_bn_stats: True
+2024-10-10 21:50:54     freeze_bn_weights: False
+2024-10-10 21:50:54   backbone_output_channels: 2048
+2024-10-10 21:50:54   heads:
+2024-10-10 21:50:54     bodypart:
+2024-10-10 21:50:54       type: HeatmapHead
+2024-10-10 21:50:54       weight_init: normal
+2024-10-10 21:50:54       predictor:
+2024-10-10 21:50:54         type: HeatmapPredictor
+2024-10-10 21:50:54         apply_sigmoid: False
+2024-10-10 21:50:54         clip_scores: True
+2024-10-10 21:50:54         location_refinement: True
+2024-10-10 21:50:54         locref_std: 7.2801
+2024-10-10 21:50:54       target_generator:
+2024-10-10 21:50:54         type: HeatmapGaussianGenerator
+2024-10-10 21:50:54         num_heatmaps: 6
+2024-10-10 21:50:54         pos_dist_thresh: 17
+2024-10-10 21:50:54         heatmap_mode: KEYPOINT
+2024-10-10 21:50:54         gradient_masking: False
+2024-10-10 21:50:54         generate_locref: True
+2024-10-10 21:50:54         locref_std: 7.2801
+2024-10-10 21:50:54       criterion:
+2024-10-10 21:50:54         heatmap:
+2024-10-10 21:50:54           type: WeightedMSECriterion
+2024-10-10 21:50:54           weight: 1.0
+2024-10-10 21:50:54         locref:
+2024-10-10 21:50:54           type: WeightedHuberCriterion
+2024-10-10 21:50:54           weight: 0.05
+2024-10-10 21:50:54       heatmap_config:
+2024-10-10 21:50:54         channels: [2048, 6]
+2024-10-10 21:50:54         kernel_size: [3]
+2024-10-10 21:50:54         strides: [2]
+2024-10-10 21:50:54       locref_config:
+2024-10-10 21:50:54         channels: [2048, 12]
+2024-10-10 21:50:54         kernel_size: [3]
+2024-10-10 21:50:54         strides: [2]
+2024-10-10 21:50:54 net_type: resnet_50
+2024-10-10 21:50:54 runner:
+2024-10-10 21:50:54   type: PoseTrainingRunner
+2024-10-10 21:50:54   gpus: None
+2024-10-10 21:50:54   key_metric: test.mAP
+2024-10-10 21:50:54   key_metric_asc: True
+2024-10-10 21:50:54   eval_interval: 10
+2024-10-10 21:50:54   optimizer:
+2024-10-10 21:50:54     type: AdamW
+2024-10-10 21:50:54     params:
+2024-10-10 21:50:54       lr: 0.0001
+2024-10-10 21:50:54   scheduler:
+2024-10-10 21:50:54     type: LRListScheduler
+2024-10-10 21:50:54     params:
+2024-10-10 21:50:54       lr_list: [[1e-05], [1e-06]]
+2024-10-10 21:50:54       milestones: [160, 190]
+2024-10-10 21:50:54   snapshots:
+2024-10-10 21:50:54     max_snapshots: 5
+2024-10-10 21:50:54     save_epochs: 25
+2024-10-10 21:50:54     save_optimizer_state: False
+2024-10-10 21:50:54 train_settings:
+2024-10-10 21:50:54   batch_size: 1
+2024-10-10 21:50:54   dataloader_workers: 0
+2024-10-10 21:50:54   dataloader_pin_memory: False
+2024-10-10 21:50:54   display_iters: 100
+2024-10-10 21:50:54   epochs: 200
+2024-10-10 21:50:54   seed: 42
+2024-10-10 21:50:55 Loading pretrained weights from Hugging Face hub (timm/resnet50_gn.a1h_in1k)
+2024-10-10 21:50:55 [timm/resnet50_gn.a1h_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+2024-10-10 21:50:55 Data Transforms:
+2024-10-10 21:50:55   Training:   Compose([
+  Affine(always_apply=False, p=0.5, interpolation=1, mask_interpolation=0, cval=0, mode=0, scale={'x': (1.0, 1.0), 'y': (1.0, 1.0)}, translate_percent=None, translate_px={'x': (0, 0), 'y': (0, 0)}, rotate=(-30, 30), fit_output=False, shear={'x': (0.0, 0.0), 'y': (0.0, 0.0)}, cval_mask=0, keep_ratio=True, rotate_method='largest_box'),
+  GaussNoise(always_apply=False, p=0.5, var_limit=(0, 162.5625), per_channel=True, mean=0),
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+], p=1.0, bbox_params={'format': 'coco', 'label_fields': ['bbox_labels'], 'min_area': 0.0, 'min_visibility': 0.0, 'min_width': 0.0, 'min_height': 0.0, 'check_each_transform': True}, keypoint_params={'format': 'xy', 'label_fields': ['class_labels'], 'remove_invisible': False, 'angle_in_degrees': True, 'check_each_transform': True}, additional_targets={}, is_check_shapes=True)
+2024-10-10 21:50:55   Validation: Compose([
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+], p=1.0, bbox_params={'format': 'coco', 'label_fields': ['bbox_labels'], 'min_area': 0.0, 'min_visibility': 0.0, 'min_width': 0.0, 'min_height': 0.0, 'check_each_transform': True}, keypoint_params={'format': 'xy', 'label_fields': ['class_labels'], 'remove_invisible': False, 'angle_in_degrees': True, 'check_each_transform': True}, additional_targets={}, is_check_shapes=True)
+2024-10-10 21:50:56 Using custom collate function: {'type': 'ResizeFromDataSizeCollate', 'min_scale': 0.4, 'max_scale': 1.0, 'min_short_side': 128, 'max_short_side': 1152, 'multiple_of': 32, 'to_square': False}
+2024-10-10 21:50:56 
+Note: According to your model configuration, you're training with batch size 1 and/or ``freeze_bn_stats=false``. This is not an optimal setting if you have powerful GPUs.
+This is good for small batch sizes (e.g., when training on a CPU), where you should keep ``freeze_bn_stats=true``.
+If you're using a GPU to train, you can obtain faster performance by setting a larger batch size (the biggest power of 2 where you don't geta CUDA out-of-memory error, such as 8, 16, 32 or 64 depending on the model, size of your images, and GPU memory) and ``freeze_bn_stats=false`` for the backbone of your model. 
+This also allows you to increase the learning rate (empirically you can scale the learning rate by sqrt(batch_size) times).
+
+2024-10-10 21:50:56 Using 340 images and 18 for testing
+2024-10-10 21:50:56 
+Starting pose model training...
+--------------------------------------------------
+2024-10-10 21:51:20 Number of iterations: 100, loss: 0.00799, lr: 0.0001
+2024-10-10 21:51:40 Number of iterations: 200, loss: 0.00454, lr: 0.0001
+2024-10-10 21:52:01 Number of iterations: 300, loss: 0.00640, lr: 0.0001
+2024-10-10 21:52:08 Epoch 1/200 (lr=0.0001), train loss 0.00690
+2024-10-10 21:52:28 Number of iterations: 100, loss: 0.00252, lr: 0.0001
+2024-10-10 21:52:47 Number of iterations: 200, loss: 0.00142, lr: 0.0001
+2024-10-10 21:53:06 Number of iterations: 300, loss: 0.00322, lr: 0.0001
+2024-10-10 21:53:14 Epoch 2/200 (lr=0.0001), train loss 0.00308
+2024-10-10 21:53:32 Number of iterations: 100, loss: 0.00161, lr: 0.0001
+2024-10-10 21:53:51 Number of iterations: 200, loss: 0.00122, lr: 0.0001
+2024-10-10 21:54:11 Number of iterations: 300, loss: 0.00189, lr: 0.0001
+2024-10-10 21:54:18 Epoch 3/200 (lr=0.0001), train loss 0.00248
+2024-10-10 21:54:38 Number of iterations: 100, loss: 0.00442, lr: 0.0001
+2024-10-10 21:54:58 Number of iterations: 200, loss: 0.00133, lr: 0.0001
+2024-10-10 21:55:17 Number of iterations: 300, loss: 0.00390, lr: 0.0001
+2024-10-10 21:55:25 Epoch 4/200 (lr=0.0001), train loss 0.00215
+2024-10-10 21:55:45 Number of iterations: 100, loss: 0.00146, lr: 0.0001
+2024-10-10 21:56:05 Number of iterations: 200, loss: 0.00163, lr: 0.0001
+2024-10-10 21:56:23 Number of iterations: 300, loss: 0.00104, lr: 0.0001
+2024-10-10 21:56:31 Epoch 5/200 (lr=0.0001), train loss 0.00211
+2024-10-10 21:56:49 Number of iterations: 100, loss: 0.00122, lr: 0.0001
+2024-10-10 21:57:07 Number of iterations: 200, loss: 0.00098, lr: 0.0001
+2024-10-10 21:57:26 Number of iterations: 300, loss: 0.00209, lr: 0.0001
+2024-10-10 21:57:34 Epoch 6/200 (lr=0.0001), train loss 0.00182
+2024-10-10 21:57:53 Number of iterations: 100, loss: 0.00251, lr: 0.0001
+2024-10-10 21:58:12 Number of iterations: 200, loss: 0.00197, lr: 0.0001
+2024-10-10 21:58:31 Number of iterations: 300, loss: 0.00323, lr: 0.0001
+2024-10-10 21:58:41 Epoch 7/200 (lr=0.0001), train loss 0.00183
+2024-10-10 21:58:57 Training with configuration:
+2024-10-10 21:58:57 data:
+2024-10-10 21:58:57   colormode: RGB
+2024-10-10 21:58:57   inference:
+2024-10-10 21:58:57     normalize_images: True
+2024-10-10 21:58:57   train:
+2024-10-10 21:58:57     affine:
+2024-10-10 21:58:57       p: 0.5
+2024-10-10 21:58:57       rotation: 30
+2024-10-10 21:58:57       scaling: [1.0, 1.0]
+2024-10-10 21:58:57       translation: 0
+2024-10-10 21:58:57     collate:
+2024-10-10 21:58:57       type: ResizeFromDataSizeCollate
+2024-10-10 21:58:57       min_scale: 0.4
+2024-10-10 21:58:57       max_scale: 1.0
+2024-10-10 21:58:57       min_short_side: 128
+2024-10-10 21:58:57       max_short_side: 1152
+2024-10-10 21:58:57       multiple_of: 32
+2024-10-10 21:58:57       to_square: False
+2024-10-10 21:58:57     covering: False
+2024-10-10 21:58:57     gaussian_noise: 12.75
+2024-10-10 21:58:57     hist_eq: False
+2024-10-10 21:58:57     motion_blur: False
+2024-10-10 21:58:57     normalize_images: True
+2024-10-10 21:58:57 device: auto
+2024-10-10 21:58:57 metadata:
+2024-10-10 21:58:57   project_path: /storage/ice1/0/2/rwang753/week8/20_videos_0603-RW-2024-10-10
+2024-10-10 21:58:57   pose_config_path: /storage/ice1/0/2/rwang753/week8/20_videos_0603-RW-2024-10-10/dlc-models-pytorch/iteration-0/20_videos_0603Oct10-trainset95shuffle1/train/pose_cfg.yaml
+2024-10-10 21:58:57   bodyparts: ['head', 'spine1', 'spine2', 'tail', 'feet1', 'feet2']
+2024-10-10 21:58:57   unique_bodyparts: []
+2024-10-10 21:58:57   individuals: ['animal']
+2024-10-10 21:58:57   with_identity: None
+2024-10-10 21:58:57 method: bu
+2024-10-10 21:58:57 model:
+2024-10-10 21:58:57   backbone:
+2024-10-10 21:58:57     type: ResNet
+2024-10-10 21:58:57     model_name: resnet50_gn
+2024-10-10 21:58:57     output_stride: 16
+2024-10-10 21:58:57     freeze_bn_stats: True
+2024-10-10 21:58:57     freeze_bn_weights: False
+2024-10-10 21:58:57   backbone_output_channels: 2048
+2024-10-10 21:58:57   heads:
+2024-10-10 21:58:57     bodypart:
+2024-10-10 21:58:57       type: HeatmapHead
+2024-10-10 21:58:57       weight_init: normal
+2024-10-10 21:58:57       predictor:
+2024-10-10 21:58:57         type: HeatmapPredictor
+2024-10-10 21:58:57         apply_sigmoid: False
+2024-10-10 21:58:57         clip_scores: True
+2024-10-10 21:58:57         location_refinement: True
+2024-10-10 21:58:57         locref_std: 7.2801
+2024-10-10 21:58:57       target_generator:
+2024-10-10 21:58:57         type: HeatmapGaussianGenerator
+2024-10-10 21:58:57         num_heatmaps: 6
+2024-10-10 21:58:57         pos_dist_thresh: 17
+2024-10-10 21:58:57         heatmap_mode: KEYPOINT
+2024-10-10 21:58:57         gradient_masking: False
+2024-10-10 21:58:57         generate_locref: True
+2024-10-10 21:58:57         locref_std: 7.2801
+2024-10-10 21:58:57       criterion:
+2024-10-10 21:58:57         heatmap:
+2024-10-10 21:58:57           type: WeightedMSECriterion
+2024-10-10 21:58:57           weight: 1.0
+2024-10-10 21:58:57         locref:
+2024-10-10 21:58:57           type: WeightedHuberCriterion
+2024-10-10 21:58:57           weight: 0.05
+2024-10-10 21:58:57       heatmap_config:
+2024-10-10 21:58:57         channels: [2048, 6]
+2024-10-10 21:58:57         kernel_size: [3]
+2024-10-10 21:58:57         strides: [2]
+2024-10-10 21:58:57       locref_config:
+2024-10-10 21:58:57         channels: [2048, 12]
+2024-10-10 21:58:57         kernel_size: [3]
+2024-10-10 21:58:57         strides: [2]
+2024-10-10 21:58:57 net_type: resnet_50
+2024-10-10 21:58:57 runner:
+2024-10-10 21:58:57   type: PoseTrainingRunner
+2024-10-10 21:58:57   gpus: None
+2024-10-10 21:58:57   key_metric: test.mAP
+2024-10-10 21:58:57   key_metric_asc: True
+2024-10-10 21:58:57   eval_interval: 10
+2024-10-10 21:58:57   optimizer:
+2024-10-10 21:58:57     type: AdamW
+2024-10-10 21:58:57     params:
+2024-10-10 21:58:57       lr: 0.0001
+2024-10-10 21:58:57   scheduler:
+2024-10-10 21:58:57     type: LRListScheduler
+2024-10-10 21:58:57     params:
+2024-10-10 21:58:57       lr_list: [[1e-05], [1e-06]]
+2024-10-10 21:58:57       milestones: [160, 190]
+2024-10-10 21:58:57   snapshots:
+2024-10-10 21:58:57     max_snapshots: 5
+2024-10-10 21:58:57     save_epochs: 25
+2024-10-10 21:58:57     save_optimizer_state: False
+2024-10-10 21:58:57 train_settings:
+2024-10-10 21:58:57   batch_size: 1
+2024-10-10 21:58:57   dataloader_workers: 0
+2024-10-10 21:58:57   dataloader_pin_memory: False
+2024-10-10 21:58:57   display_iters: 100
+2024-10-10 21:58:57   epochs: 200
+2024-10-10 21:58:57   seed: 42
+2024-10-10 21:58:57 Loading pretrained weights from Hugging Face hub (timm/resnet50_gn.a1h_in1k)
+2024-10-10 21:58:57 [timm/resnet50_gn.a1h_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+2024-10-10 21:58:58 Data Transforms:
+2024-10-10 21:58:58   Training:   Compose([
+  Affine(always_apply=False, p=0.5, interpolation=1, mask_interpolation=0, cval=0, mode=0, scale={'x': (1.0, 1.0), 'y': (1.0, 1.0)}, translate_percent=None, translate_px={'x': (0, 0), 'y': (0, 0)}, rotate=(-30, 30), fit_output=False, shear={'x': (0.0, 0.0), 'y': (0.0, 0.0)}, cval_mask=0, keep_ratio=True, rotate_method='largest_box'),
+  GaussNoise(always_apply=False, p=0.5, var_limit=(0, 162.5625), per_channel=True, mean=0),
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+], p=1.0, bbox_params={'format': 'coco', 'label_fields': ['bbox_labels'], 'min_area': 0.0, 'min_visibility': 0.0, 'min_width': 0.0, 'min_height': 0.0, 'check_each_transform': True}, keypoint_params={'format': 'xy', 'label_fields': ['class_labels'], 'remove_invisible': False, 'angle_in_degrees': True, 'check_each_transform': True}, additional_targets={}, is_check_shapes=True)
+2024-10-10 21:58:58   Validation: Compose([
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+], p=1.0, bbox_params={'format': 'coco', 'label_fields': ['bbox_labels'], 'min_area': 0.0, 'min_visibility': 0.0, 'min_width': 0.0, 'min_height': 0.0, 'check_each_transform': True}, keypoint_params={'format': 'xy', 'label_fields': ['class_labels'], 'remove_invisible': False, 'angle_in_degrees': True, 'check_each_transform': True}, additional_targets={}, is_check_shapes=True)
+2024-10-10 21:58:58 Using custom collate function: {'type': 'ResizeFromDataSizeCollate', 'min_scale': 0.4, 'max_scale': 1.0, 'min_short_side': 128, 'max_short_side': 1152, 'multiple_of': 32, 'to_square': False}
+2024-10-10 21:58:58 
+Note: According to your model configuration, you're training with batch size 1 and/or ``freeze_bn_stats=false``. This is not an optimal setting if you have powerful GPUs.
+This is good for small batch sizes (e.g., when training on a CPU), where you should keep ``freeze_bn_stats=true``.
+If you're using a GPU to train, you can obtain faster performance by setting a larger batch size (the biggest power of 2 where you don't geta CUDA out-of-memory error, such as 8, 16, 32 or 64 depending on the model, size of your images, and GPU memory) and ``freeze_bn_stats=false`` for the backbone of your model. 
+This also allows you to increase the learning rate (empirically you can scale the learning rate by sqrt(batch_size) times).
+
+2024-10-10 21:58:58 Using 340 images and 18 for testing
+2024-10-10 21:58:58 
+Starting pose model training...
+--------------------------------------------------
+2024-10-10 21:59:00 Number of iterations: 100, loss: 0.00147, lr: 0.0001
+2024-10-10 21:59:20 Number of iterations: 200, loss: 0.00076, lr: 0.0001
+2024-10-10 21:59:20 Number of iterations: 100, loss: 0.00799, lr: 0.0001
+2024-10-10 21:59:40 Number of iterations: 300, loss: 0.00065, lr: 0.0001
+2024-10-10 21:59:41 Number of iterations: 200, loss: 0.00454, lr: 0.0001
+2024-10-10 21:59:48 Epoch 8/200 (lr=0.0001), train loss 0.00169
+2024-10-10 22:00:02 Number of iterations: 300, loss: 0.00640, lr: 0.0001
+2024-10-10 22:00:07 Number of iterations: 100, loss: 0.00115, lr: 0.0001
+2024-10-10 22:00:10 Epoch 1/200 (lr=0.0001), train loss 0.00690
+2024-10-10 22:00:27 Number of iterations: 200, loss: 0.00282, lr: 0.0001
+2024-10-10 22:00:29 Number of iterations: 100, loss: 0.00252, lr: 0.0001
+2024-10-10 22:00:48 Number of iterations: 300, loss: 0.00315, lr: 0.0001
+2024-10-10 22:00:48 Number of iterations: 200, loss: 0.00142, lr: 0.0001
+2024-10-10 22:00:56 Epoch 9/200 (lr=0.0001), train loss 0.00175
+2024-10-10 22:01:08 Number of iterations: 300, loss: 0.00322, lr: 0.0001
+2024-10-10 22:01:14 Number of iterations: 100, loss: 0.00180, lr: 0.0001
+2024-10-10 22:01:16 Epoch 2/200 (lr=0.0001), train loss 0.00308
+2024-10-10 22:01:34 Number of iterations: 200, loss: 0.00281, lr: 0.0001
+2024-10-10 22:01:55 Number of iterations: 300, loss: 0.00087, lr: 0.0001
+2024-10-10 22:02:02 Training for epoch 10 done, starting evaluation
+2024-10-10 22:02:04 Epoch 10 performance:
+2024-10-10 22:02:04 metrics/test.rmse:  4.834
+2024-10-10 22:02:04 metrics/test.rmse_pcutoff:4.855
+2024-10-10 22:02:04 metrics/test.mAP:   66.245
+2024-10-10 22:02:04 metrics/test.mAR:   74.444
+2024-10-10 22:02:04 metrics/test.rmse_detections:4.834
+2024-10-10 22:02:04 metrics/test.rmse_detections_pcutoff:4.855
+2024-10-10 22:02:04 Epoch 10/200 (lr=0.0001), train loss 0.00167, valid loss 0.00289
+2024-10-10 22:02:25 Number of iterations: 100, loss: 0.00078, lr: 0.0001
+2024-10-10 22:02:44 Number of iterations: 200, loss: 0.00061, lr: 0.0001
+2024-10-10 22:03:03 Number of iterations: 300, loss: 0.00051, lr: 0.0001
+2024-10-10 22:03:11 Epoch 11/200 (lr=0.0001), train loss 0.00152
+2024-10-10 22:03:30 Number of iterations: 100, loss: 0.00038, lr: 0.0001
+2024-10-10 22:03:50 Number of iterations: 200, loss: 0.00276, lr: 0.0001
+2024-10-10 22:04:09 Number of iterations: 300, loss: 0.00286, lr: 0.0001
+2024-10-10 22:04:18 Epoch 12/200 (lr=0.0001), train loss 0.00158
+2024-10-10 22:04:37 Number of iterations: 100, loss: 0.00293, lr: 0.0001
+2024-10-10 22:04:56 Number of iterations: 200, loss: 0.00209, lr: 0.0001
+2024-10-10 22:05:16 Number of iterations: 300, loss: 0.00085, lr: 0.0001
+2024-10-10 22:05:24 Epoch 13/200 (lr=0.0001), train loss 0.00156
+2024-10-10 22:05:44 Number of iterations: 100, loss: 0.00113, lr: 0.0001
+2024-10-10 22:06:04 Number of iterations: 200, loss: 0.00104, lr: 0.0001
+2024-10-10 22:06:23 Number of iterations: 300, loss: 0.00181, lr: 0.0001
+2024-10-10 22:06:30 Epoch 14/200 (lr=0.0001), train loss 0.00148
+2024-10-10 22:06:50 Number of iterations: 100, loss: 0.00145, lr: 0.0001
+2024-10-10 22:07:09 Number of iterations: 200, loss: 0.00138, lr: 0.0001
+2024-10-10 22:07:29 Number of iterations: 300, loss: 0.00106, lr: 0.0001
+2024-10-10 22:07:38 Epoch 15/200 (lr=0.0001), train loss 0.00141
+2024-10-10 22:07:58 Number of iterations: 100, loss: 0.00065, lr: 0.0001
+2024-10-10 22:08:18 Number of iterations: 200, loss: 0.00071, lr: 0.0001
+2024-10-10 22:08:37 Number of iterations: 300, loss: 0.00093, lr: 0.0001
+2024-10-10 22:08:45 Epoch 16/200 (lr=0.0001), train loss 0.00143
+2024-10-10 22:09:05 Number of iterations: 100, loss: 0.00200, lr: 0.0001
+2024-10-10 22:09:24 Number of iterations: 200, loss: 0.00072, lr: 0.0001
+2024-10-10 22:09:43 Number of iterations: 300, loss: 0.00150, lr: 0.0001
+2024-10-10 22:09:50 Epoch 17/200 (lr=0.0001), train loss 0.00137
+2024-10-10 22:10:10 Number of iterations: 100, loss: 0.00113, lr: 0.0001
+2024-10-10 22:10:30 Number of iterations: 200, loss: 0.00077, lr: 0.0001
+2024-10-10 22:10:49 Number of iterations: 300, loss: 0.00090, lr: 0.0001
+2024-10-10 22:10:57 Epoch 18/200 (lr=0.0001), train loss 0.00135
+2024-10-10 22:11:16 Number of iterations: 100, loss: 0.00042, lr: 0.0001
+2024-10-10 22:11:35 Number of iterations: 200, loss: 0.00153, lr: 0.0001
+2024-10-10 22:11:56 Number of iterations: 300, loss: 0.00235, lr: 0.0001
+2024-10-10 22:12:04 Epoch 19/200 (lr=0.0001), train loss 0.00131
+2024-10-10 22:12:22 Number of iterations: 100, loss: 0.00042, lr: 0.0001
+2024-10-10 22:12:42 Number of iterations: 200, loss: 0.00124, lr: 0.0001
+2024-10-10 22:13:02 Number of iterations: 300, loss: 0.00054, lr: 0.0001
+2024-10-10 22:13:11 Training for epoch 20 done, starting evaluation
+2024-10-10 22:13:13 Epoch 20 performance:
+2024-10-10 22:13:13 metrics/test.rmse:  4.565
+2024-10-10 22:13:13 metrics/test.rmse_pcutoff:4.565
+2024-10-10 22:13:13 metrics/test.mAP:   72.347
+2024-10-10 22:13:13 metrics/test.mAR:   77.778
+2024-10-10 22:13:13 metrics/test.rmse_detections:4.565
+2024-10-10 22:13:13 metrics/test.rmse_detections_pcutoff:4.565
+2024-10-10 22:13:13 Epoch 20/200 (lr=0.0001), train loss 0.00133, valid loss 0.00260
+2024-10-10 22:13:33 Number of iterations: 100, loss: 0.00187, lr: 0.0001
+2024-10-10 22:13:53 Number of iterations: 200, loss: 0.00315, lr: 0.0001
+2024-10-10 22:14:12 Number of iterations: 300, loss: 0.00110, lr: 0.0001
+2024-10-10 22:14:21 Epoch 21/200 (lr=0.0001), train loss 0.00131
+2024-10-10 22:14:40 Number of iterations: 100, loss: 0.00057, lr: 0.0001
+2024-10-10 22:14:59 Number of iterations: 200, loss: 0.00174, lr: 0.0001
+2024-10-10 22:15:20 Number of iterations: 300, loss: 0.00152, lr: 0.0001
+2024-10-10 22:15:28 Epoch 22/200 (lr=0.0001), train loss 0.00131
+2024-10-10 22:15:48 Number of iterations: 100, loss: 0.00143, lr: 0.0001
+2024-10-10 22:16:08 Number of iterations: 200, loss: 0.00105, lr: 0.0001
+2024-10-10 22:16:28 Number of iterations: 300, loss: 0.00211, lr: 0.0001
+2024-10-10 22:16:36 Epoch 23/200 (lr=0.0001), train loss 0.00132
+2024-10-10 22:16:56 Number of iterations: 100, loss: 0.00069, lr: 0.0001
+2024-10-10 22:17:14 Number of iterations: 200, loss: 0.00095, lr: 0.0001
+2024-10-10 22:17:32 Number of iterations: 300, loss: 0.00138, lr: 0.0001
+2024-10-10 22:17:40 Epoch 24/200 (lr=0.0001), train loss 0.00130
+2024-10-10 22:18:00 Number of iterations: 100, loss: 0.00083, lr: 0.0001
+2024-10-10 22:18:21 Number of iterations: 200, loss: 0.00064, lr: 0.0001
+2024-10-10 22:18:40 Number of iterations: 300, loss: 0.00065, lr: 0.0001
+2024-10-10 22:18:48 Epoch 25/200 (lr=0.0001), train loss 0.00127
+2024-10-10 22:19:08 Number of iterations: 100, loss: 0.00074, lr: 0.0001
+2024-10-10 22:19:28 Number of iterations: 200, loss: 0.00063, lr: 0.0001
+2024-10-10 22:19:47 Number of iterations: 300, loss: 0.00054, lr: 0.0001
+2024-10-10 22:19:55 Epoch 26/200 (lr=0.0001), train loss 0.00119
+2024-10-10 22:20:14 Number of iterations: 100, loss: 0.00083, lr: 0.0001
+2024-10-10 22:20:34 Number of iterations: 200, loss: 0.00079, lr: 0.0001
+2024-10-10 22:20:53 Number of iterations: 300, loss: 0.00057, lr: 0.0001
+2024-10-10 22:21:01 Epoch 27/200 (lr=0.0001), train loss 0.00126
+2024-10-10 22:21:21 Number of iterations: 100, loss: 0.00177, lr: 0.0001
+2024-10-10 22:21:40 Number of iterations: 200, loss: 0.00037, lr: 0.0001
+2024-10-10 22:21:59 Number of iterations: 300, loss: 0.00296, lr: 0.0001
+2024-10-10 22:22:07 Epoch 28/200 (lr=0.0001), train loss 0.00117
+2024-10-10 22:22:27 Number of iterations: 100, loss: 0.00126, lr: 0.0001
+2024-10-10 22:22:46 Number of iterations: 200, loss: 0.00185, lr: 0.0001
+2024-10-10 22:23:05 Number of iterations: 300, loss: 0.00062, lr: 0.0001
+2024-10-10 22:23:13 Epoch 29/200 (lr=0.0001), train loss 0.00117
+2024-10-10 22:23:34 Number of iterations: 100, loss: 0.00120, lr: 0.0001
+2024-10-10 22:23:52 Number of iterations: 200, loss: 0.00160, lr: 0.0001
+2024-10-10 22:24:11 Number of iterations: 300, loss: 0.00103, lr: 0.0001
+2024-10-10 22:24:20 Training for epoch 30 done, starting evaluation
+2024-10-10 22:24:21 Epoch 30 performance:
+2024-10-10 22:24:21 metrics/test.rmse:  4.438
+2024-10-10 22:24:21 metrics/test.rmse_pcutoff:4.438
+2024-10-10 22:24:21 metrics/test.mAP:   77.696
+2024-10-10 22:24:21 metrics/test.mAR:   80.000
+2024-10-10 22:24:21 metrics/test.rmse_detections:4.438
+2024-10-10 22:24:21 metrics/test.rmse_detections_pcutoff:4.438
+2024-10-10 22:24:21 Epoch 30/200 (lr=0.0001), train loss 0.00116, valid loss 0.00253
+2024-10-10 22:24:42 Number of iterations: 100, loss: 0.00090, lr: 0.0001
+2024-10-10 22:25:02 Number of iterations: 200, loss: 0.00204, lr: 0.0001
+2024-10-10 22:25:21 Number of iterations: 300, loss: 0.00542, lr: 0.0001
+2024-10-10 22:25:29 Epoch 31/200 (lr=0.0001), train loss 0.00114
+2024-10-10 22:25:48 Number of iterations: 100, loss: 0.00067, lr: 0.0001
+2024-10-10 22:26:08 Number of iterations: 200, loss: 0.00062, lr: 0.0001
+2024-10-10 22:26:29 Number of iterations: 300, loss: 0.00129, lr: 0.0001
+2024-10-10 22:26:38 Epoch 32/200 (lr=0.0001), train loss 0.00107
+2024-10-10 22:26:58 Number of iterations: 100, loss: 0.00089, lr: 0.0001
+2024-10-10 22:27:17 Number of iterations: 200, loss: 0.00118, lr: 0.0001
+2024-10-10 22:27:39 Number of iterations: 300, loss: 0.00070, lr: 0.0001
+2024-10-10 22:27:47 Epoch 33/200 (lr=0.0001), train loss 0.00111
+2024-10-10 22:28:05 Number of iterations: 100, loss: 0.00049, lr: 0.0001
+2024-10-10 22:28:26 Number of iterations: 200, loss: 0.00040, lr: 0.0001
+2024-10-10 22:28:46 Number of iterations: 300, loss: 0.00173, lr: 0.0001
+2024-10-10 22:28:55 Epoch 34/200 (lr=0.0001), train loss 0.00103
+2024-10-10 22:29:14 Number of iterations: 100, loss: 0.00087, lr: 0.0001
+2024-10-10 22:29:34 Number of iterations: 200, loss: 0.00092, lr: 0.0001
+2024-10-10 22:29:52 Number of iterations: 300, loss: 0.00110, lr: 0.0001
+2024-10-10 22:30:00 Epoch 35/200 (lr=0.0001), train loss 0.00115
+2024-10-10 22:30:21 Number of iterations: 100, loss: 0.00096, lr: 0.0001
+2024-10-10 22:30:41 Number of iterations: 200, loss: 0.00144, lr: 0.0001
+2024-10-10 22:31:01 Number of iterations: 300, loss: 0.00049, lr: 0.0001
+2024-10-10 22:31:10 Epoch 36/200 (lr=0.0001), train loss 0.00109
+2024-10-10 22:31:31 Number of iterations: 100, loss: 0.00277, lr: 0.0001
+2024-10-10 22:31:51 Number of iterations: 200, loss: 0.00063, lr: 0.0001
+2024-10-10 22:32:10 Number of iterations: 300, loss: 0.00043, lr: 0.0001
+2024-10-10 22:32:18 Epoch 37/200 (lr=0.0001), train loss 0.00102
+2024-10-10 22:32:40 Number of iterations: 100, loss: 0.00093, lr: 0.0001
+2024-10-10 22:32:59 Number of iterations: 200, loss: 0.00186, lr: 0.0001
+2024-10-10 22:33:20 Number of iterations: 300, loss: 0.00189, lr: 0.0001
+2024-10-10 22:33:27 Epoch 38/200 (lr=0.0001), train loss 0.00104
+2024-10-10 22:33:47 Number of iterations: 100, loss: 0.00467, lr: 0.0001
+2024-10-10 22:34:06 Number of iterations: 200, loss: 0.00187, lr: 0.0001
+2024-10-10 22:34:26 Number of iterations: 300, loss: 0.00120, lr: 0.0001
+2024-10-10 22:34:34 Epoch 39/200 (lr=0.0001), train loss 0.00105
+2024-10-10 22:34:55 Number of iterations: 100, loss: 0.00088, lr: 0.0001
+2024-10-10 22:35:15 Number of iterations: 200, loss: 0.00097, lr: 0.0001
+2024-10-10 22:35:34 Number of iterations: 300, loss: 0.00211, lr: 0.0001
+2024-10-10 22:35:43 Training for epoch 40 done, starting evaluation
+2024-10-10 22:35:45 Epoch 40 performance:
+2024-10-10 22:35:45 metrics/test.rmse:  4.008
+2024-10-10 22:35:45 metrics/test.rmse_pcutoff:4.008
+2024-10-10 22:35:45 metrics/test.mAP:   79.798
+2024-10-10 22:35:45 metrics/test.mAR:   83.889
+2024-10-10 22:35:45 metrics/test.rmse_detections:4.008
+2024-10-10 22:35:45 metrics/test.rmse_detections_pcutoff:4.008
+2024-10-10 22:35:45 Epoch 40/200 (lr=0.0001), train loss 0.00102, valid loss 0.00225
+2024-10-10 22:36:02 Number of iterations: 100, loss: 0.00102, lr: 0.0001
+2024-10-10 22:36:22 Number of iterations: 200, loss: 0.00051, lr: 0.0001
+2024-10-10 22:36:42 Number of iterations: 300, loss: 0.00035, lr: 0.0001
+2024-10-10 22:36:50 Epoch 41/200 (lr=0.0001), train loss 0.00101
+2024-10-10 22:37:10 Number of iterations: 100, loss: 0.00054, lr: 0.0001
+2024-10-10 22:37:31 Number of iterations: 200, loss: 0.00052, lr: 0.0001
+2024-10-10 22:37:51 Number of iterations: 300, loss: 0.00060, lr: 0.0001
+2024-10-10 22:37:59 Epoch 42/200 (lr=0.0001), train loss 0.00106
+2024-10-10 22:38:19 Number of iterations: 100, loss: 0.00107, lr: 0.0001
+2024-10-10 22:38:38 Number of iterations: 200, loss: 0.00141, lr: 0.0001
+2024-10-10 22:38:56 Number of iterations: 300, loss: 0.00121, lr: 0.0001
+2024-10-10 22:39:04 Epoch 43/200 (lr=0.0001), train loss 0.00094
+2024-10-10 22:39:25 Number of iterations: 100, loss: 0.00118, lr: 0.0001
+2024-10-10 22:39:44 Number of iterations: 200, loss: 0.00066, lr: 0.0001
+2024-10-10 22:40:05 Number of iterations: 300, loss: 0.00053, lr: 0.0001
+2024-10-10 22:40:12 Epoch 44/200 (lr=0.0001), train loss 0.00095
+2024-10-10 22:40:32 Number of iterations: 100, loss: 0.00059, lr: 0.0001
+2024-10-10 22:40:51 Number of iterations: 200, loss: 0.00070, lr: 0.0001
+2024-10-10 22:41:10 Number of iterations: 300, loss: 0.00026, lr: 0.0001
+2024-10-10 22:41:17 Epoch 45/200 (lr=0.0001), train loss 0.00102
+2024-10-10 22:41:35 Number of iterations: 100, loss: 0.00199, lr: 0.0001
+2024-10-10 22:41:55 Number of iterations: 200, loss: 0.00117, lr: 0.0001
+2024-10-10 22:42:16 Number of iterations: 300, loss: 0.00110, lr: 0.0001
+2024-10-10 22:42:24 Epoch 46/200 (lr=0.0001), train loss 0.00093
+2024-10-10 22:42:42 Number of iterations: 100, loss: 0.00037, lr: 0.0001
+2024-10-10 22:43:02 Number of iterations: 200, loss: 0.00134, lr: 0.0001
+2024-10-10 22:43:22 Number of iterations: 300, loss: 0.00172, lr: 0.0001
+2024-10-10 22:43:30 Epoch 47/200 (lr=0.0001), train loss 0.00103
+2024-10-10 22:43:51 Number of iterations: 100, loss: 0.00070, lr: 0.0001
+2024-10-10 22:44:09 Number of iterations: 200, loss: 0.00144, lr: 0.0001
+2024-10-10 22:44:28 Number of iterations: 300, loss: 0.00045, lr: 0.0001
+2024-10-10 22:44:35 Epoch 48/200 (lr=0.0001), train loss 0.00093
+2024-10-10 22:44:54 Number of iterations: 100, loss: 0.00091, lr: 0.0001
+2024-10-10 22:45:14 Number of iterations: 200, loss: 0.00107, lr: 0.0001
+2024-10-10 22:45:34 Number of iterations: 300, loss: 0.00084, lr: 0.0001
+2024-10-10 22:45:42 Epoch 49/200 (lr=0.0001), train loss 0.00100
+2024-10-10 22:46:01 Number of iterations: 100, loss: 0.00128, lr: 0.0001
+2024-10-10 22:46:20 Number of iterations: 200, loss: 0.00060, lr: 0.0001
+2024-10-10 22:46:39 Number of iterations: 300, loss: 0.00030, lr: 0.0001
+2024-10-10 22:46:46 Training for epoch 50 done, starting evaluation
+2024-10-10 22:46:48 Epoch 50 performance:
+2024-10-10 22:46:48 metrics/test.rmse:  4.301
+2024-10-10 22:46:48 metrics/test.rmse_pcutoff:4.301
+2024-10-10 22:46:48 metrics/test.mAP:   71.121
+2024-10-10 22:46:48 metrics/test.mAR:   80.000
+2024-10-10 22:46:48 metrics/test.rmse_detections:4.301
+2024-10-10 22:46:48 metrics/test.rmse_detections_pcutoff:4.301
+2024-10-10 22:46:48 Epoch 50/200 (lr=0.0001), train loss 0.00093, valid loss 0.00244
+2024-10-10 22:47:07 Number of iterations: 100, loss: 0.00051, lr: 0.0001
+2024-10-10 22:47:26 Number of iterations: 200, loss: 0.00030, lr: 0.0001
+2024-10-10 22:47:45 Number of iterations: 300, loss: 0.00201, lr: 0.0001
+2024-10-10 22:47:52 Epoch 51/200 (lr=0.0001), train loss 0.00090
+2024-10-10 22:48:11 Number of iterations: 100, loss: 0.00075, lr: 0.0001
+2024-10-10 22:48:29 Number of iterations: 200, loss: 0.00116, lr: 0.0001
+2024-10-10 22:48:50 Number of iterations: 300, loss: 0.00056, lr: 0.0001
+2024-10-10 22:48:58 Epoch 52/200 (lr=0.0001), train loss 0.00089
+2024-10-10 22:49:18 Number of iterations: 100, loss: 0.00080, lr: 0.0001
+2024-10-10 22:49:37 Number of iterations: 200, loss: 0.00070, lr: 0.0001
+2024-10-10 22:49:56 Number of iterations: 300, loss: 0.00040, lr: 0.0001
+2024-10-10 22:50:04 Epoch 53/200 (lr=0.0001), train loss 0.00096
+2024-10-10 22:50:24 Number of iterations: 100, loss: 0.00097, lr: 0.0001
+2024-10-10 22:50:43 Number of iterations: 200, loss: 0.00105, lr: 0.0001
+2024-10-10 22:51:03 Number of iterations: 300, loss: 0.00080, lr: 0.0001
+2024-10-10 22:51:10 Epoch 54/200 (lr=0.0001), train loss 0.00089
+2024-10-10 22:51:27 Number of iterations: 100, loss: 0.00036, lr: 0.0001
+2024-10-10 22:51:46 Number of iterations: 200, loss: 0.00056, lr: 0.0001
+2024-10-10 22:52:05 Number of iterations: 300, loss: 0.00114, lr: 0.0001
+2024-10-10 22:52:13 Epoch 55/200 (lr=0.0001), train loss 0.00088
+2024-10-10 22:52:32 Number of iterations: 100, loss: 0.00103, lr: 0.0001
+2024-10-10 22:52:50 Number of iterations: 200, loss: 0.00044, lr: 0.0001
+2024-10-10 22:53:09 Number of iterations: 300, loss: 0.00187, lr: 0.0001
+2024-10-10 22:53:16 Epoch 56/200 (lr=0.0001), train loss 0.00101
+2024-10-10 22:53:35 Number of iterations: 100, loss: 0.00041, lr: 0.0001
+2024-10-10 22:53:54 Number of iterations: 200, loss: 0.00114, lr: 0.0001
+2024-10-10 22:54:13 Number of iterations: 300, loss: 0.00101, lr: 0.0001
+2024-10-10 22:54:20 Epoch 57/200 (lr=0.0001), train loss 0.00092
+2024-10-10 22:54:39 Number of iterations: 100, loss: 0.00034, lr: 0.0001
+2024-10-10 22:54:57 Number of iterations: 200, loss: 0.00039, lr: 0.0001
+2024-10-10 22:55:15 Number of iterations: 300, loss: 0.00034, lr: 0.0001
+2024-10-10 22:55:23 Epoch 58/200 (lr=0.0001), train loss 0.00084
+2024-10-10 22:55:41 Number of iterations: 100, loss: 0.00066, lr: 0.0001
+2024-10-10 22:56:01 Number of iterations: 200, loss: 0.00098, lr: 0.0001
+2024-10-10 22:56:20 Number of iterations: 300, loss: 0.00039, lr: 0.0001
+2024-10-10 22:56:28 Epoch 59/200 (lr=0.0001), train loss 0.00084
+2024-10-10 22:56:46 Number of iterations: 100, loss: 0.00130, lr: 0.0001
+2024-10-10 22:57:05 Number of iterations: 200, loss: 0.00054, lr: 0.0001
+2024-10-10 22:57:25 Number of iterations: 300, loss: 0.00078, lr: 0.0001
+2024-10-10 22:57:33 Training for epoch 60 done, starting evaluation
+2024-10-10 22:57:35 Epoch 60 performance:
+2024-10-10 22:57:35 metrics/test.rmse:  4.423
+2024-10-10 22:57:35 metrics/test.rmse_pcutoff:4.423
+2024-10-10 22:57:35 metrics/test.mAP:   72.066
+2024-10-10 22:57:35 metrics/test.mAR:   78.333
+2024-10-10 22:57:35 metrics/test.rmse_detections:4.423
+2024-10-10 22:57:35 metrics/test.rmse_detections_pcutoff:4.423
+2024-10-10 22:57:35 Epoch 60/200 (lr=0.0001), train loss 0.00087, valid loss 0.00271
+2024-10-10 22:57:54 Number of iterations: 100, loss: 0.00049, lr: 0.0001
+2024-10-10 22:58:13 Number of iterations: 200, loss: 0.00047, lr: 0.0001
+2024-10-10 22:58:32 Number of iterations: 300, loss: 0.00024, lr: 0.0001
+2024-10-10 22:58:40 Epoch 61/200 (lr=0.0001), train loss 0.00081
+2024-10-10 22:59:00 Number of iterations: 100, loss: 0.00075, lr: 0.0001
+2024-10-10 22:59:19 Number of iterations: 200, loss: 0.00140, lr: 0.0001
+2024-10-10 22:59:40 Number of iterations: 300, loss: 0.00091, lr: 0.0001
+2024-10-10 22:59:48 Epoch 62/200 (lr=0.0001), train loss 0.00085
+2024-10-10 23:00:08 Number of iterations: 100, loss: 0.00058, lr: 0.0001
+2024-10-10 23:00:27 Number of iterations: 200, loss: 0.00092, lr: 0.0001
+2024-10-10 23:00:46 Number of iterations: 300, loss: 0.00249, lr: 0.0001
+2024-10-10 23:00:54 Epoch 63/200 (lr=0.0001), train loss 0.00078
+2024-10-10 23:01:13 Number of iterations: 100, loss: 0.00119, lr: 0.0001
+2024-10-10 23:01:34 Number of iterations: 200, loss: 0.00056, lr: 0.0001
+2024-10-10 23:01:53 Number of iterations: 300, loss: 0.00097, lr: 0.0001
+2024-10-10 23:02:00 Epoch 64/200 (lr=0.0001), train loss 0.00082
+2024-10-10 23:02:22 Number of iterations: 100, loss: 0.00047, lr: 0.0001
+2024-10-10 23:02:42 Number of iterations: 200, loss: 0.00181, lr: 0.0001
+2024-10-10 23:03:01 Number of iterations: 300, loss: 0.00043, lr: 0.0001
+2024-10-10 23:03:08 Epoch 65/200 (lr=0.0001), train loss 0.00083
+2024-10-10 23:03:27 Number of iterations: 100, loss: 0.00067, lr: 0.0001
+2024-10-10 23:03:46 Number of iterations: 200, loss: 0.00077, lr: 0.0001
+2024-10-10 23:04:05 Number of iterations: 300, loss: 0.00101, lr: 0.0001
+2024-10-10 23:04:13 Epoch 66/200 (lr=0.0001), train loss 0.00082
+2024-10-10 23:04:32 Number of iterations: 100, loss: 0.00043, lr: 0.0001
+2024-10-10 23:04:53 Number of iterations: 200, loss: 0.00054, lr: 0.0001
+2024-10-10 23:05:13 Number of iterations: 300, loss: 0.00036, lr: 0.0001
+2024-10-10 23:05:20 Epoch 67/200 (lr=0.0001), train loss 0.00079
+2024-10-10 23:05:41 Number of iterations: 100, loss: 0.00050, lr: 0.0001
+2024-10-10 23:06:01 Number of iterations: 200, loss: 0.00084, lr: 0.0001
+2024-10-10 23:06:19 Number of iterations: 300, loss: 0.00100, lr: 0.0001
+2024-10-10 23:06:27 Epoch 68/200 (lr=0.0001), train loss 0.00076
+2024-10-10 23:06:47 Number of iterations: 100, loss: 0.00073, lr: 0.0001
+2024-10-10 23:07:07 Number of iterations: 200, loss: 0.00057, lr: 0.0001
+2024-10-10 23:07:27 Number of iterations: 300, loss: 0.00106, lr: 0.0001
+2024-10-10 23:07:34 Epoch 69/200 (lr=0.0001), train loss 0.00077
+2024-10-10 23:07:54 Number of iterations: 100, loss: 0.00052, lr: 0.0001
+2024-10-10 23:08:12 Number of iterations: 200, loss: 0.00053, lr: 0.0001
+2024-10-10 23:08:30 Number of iterations: 300, loss: 0.00135, lr: 0.0001
+2024-10-10 23:08:39 Training for epoch 70 done, starting evaluation
+2024-10-10 23:08:41 Epoch 70 performance:
+2024-10-10 23:08:41 metrics/test.rmse:  4.106
+2024-10-10 23:08:41 metrics/test.rmse_pcutoff:4.106
+2024-10-10 23:08:41 metrics/test.mAP:   79.356
+2024-10-10 23:08:41 metrics/test.mAR:   82.778
+2024-10-10 23:08:41 metrics/test.rmse_detections:4.106
+2024-10-10 23:08:41 metrics/test.rmse_detections_pcutoff:4.106
+2024-10-10 23:08:41 Epoch 70/200 (lr=0.0001), train loss 0.00080, valid loss 0.00228
+2024-10-10 23:09:01 Number of iterations: 100, loss: 0.00113, lr: 0.0001
+2024-10-10 23:09:20 Number of iterations: 200, loss: 0.00044, lr: 0.0001
+2024-10-10 23:09:40 Number of iterations: 300, loss: 0.00035, lr: 0.0001
+2024-10-10 23:09:48 Epoch 71/200 (lr=0.0001), train loss 0.00076
+2024-10-10 23:10:09 Number of iterations: 100, loss: 0.00028, lr: 0.0001
+2024-10-10 23:10:27 Number of iterations: 200, loss: 0.00074, lr: 0.0001
+2024-10-10 23:10:47 Number of iterations: 300, loss: 0.00131, lr: 0.0001
+2024-10-10 23:10:55 Epoch 72/200 (lr=0.0001), train loss 0.00082
+2024-10-10 23:11:14 Number of iterations: 100, loss: 0.00129, lr: 0.0001
+2024-10-10 23:11:33 Number of iterations: 200, loss: 0.00071, lr: 0.0001
+2024-10-10 23:11:53 Number of iterations: 300, loss: 0.00067, lr: 0.0001
+2024-10-10 23:12:01 Epoch 73/200 (lr=0.0001), train loss 0.00079
+2024-10-10 23:12:20 Number of iterations: 100, loss: 0.00039, lr: 0.0001
+2024-10-10 23:12:40 Number of iterations: 200, loss: 0.00070, lr: 0.0001
+2024-10-10 23:12:59 Number of iterations: 300, loss: 0.00029, lr: 0.0001
+2024-10-10 23:13:06 Epoch 74/200 (lr=0.0001), train loss 0.00074
+2024-10-10 23:13:25 Number of iterations: 100, loss: 0.00069, lr: 0.0001
+2024-10-10 23:13:44 Number of iterations: 200, loss: 0.00031, lr: 0.0001
+2024-10-10 23:14:05 Number of iterations: 300, loss: 0.00065, lr: 0.0001
+2024-10-10 23:14:11 Epoch 75/200 (lr=0.0001), train loss 0.00073
+2024-10-10 23:14:30 Number of iterations: 100, loss: 0.00236, lr: 0.0001
+2024-10-10 23:14:49 Number of iterations: 200, loss: 0.00027, lr: 0.0001
+2024-10-10 23:15:10 Number of iterations: 300, loss: 0.00166, lr: 0.0001
+2024-10-10 23:15:17 Epoch 76/200 (lr=0.0001), train loss 0.00079
+2024-10-10 23:15:37 Number of iterations: 100, loss: 0.00045, lr: 0.0001
+2024-10-10 23:15:56 Number of iterations: 200, loss: 0.00073, lr: 0.0001
+2024-10-10 23:16:14 Number of iterations: 300, loss: 0.00050, lr: 0.0001
+2024-10-10 23:16:22 Epoch 77/200 (lr=0.0001), train loss 0.00074
+2024-10-10 23:16:41 Number of iterations: 100, loss: 0.00086, lr: 0.0001
+2024-10-10 23:17:00 Number of iterations: 200, loss: 0.00037, lr: 0.0001
+2024-10-10 23:17:19 Number of iterations: 300, loss: 0.00084, lr: 0.0001
+2024-10-10 23:17:26 Epoch 78/200 (lr=0.0001), train loss 0.00078
+2024-10-10 23:17:45 Number of iterations: 100, loss: 0.00075, lr: 0.0001
+2024-10-10 23:18:04 Number of iterations: 200, loss: 0.00022, lr: 0.0001
+2024-10-10 23:18:24 Number of iterations: 300, loss: 0.00000, lr: 0.0001
+2024-10-10 23:18:32 Epoch 79/200 (lr=0.0001), train loss 0.00071
+2024-10-10 23:18:51 Number of iterations: 100, loss: 0.00044, lr: 0.0001
+2024-10-10 23:19:11 Number of iterations: 200, loss: 0.00021, lr: 0.0001
+2024-10-10 23:19:31 Number of iterations: 300, loss: 0.00084, lr: 0.0001
+2024-10-10 23:19:39 Training for epoch 80 done, starting evaluation
+2024-10-10 23:19:41 Epoch 80 performance:
+2024-10-10 23:19:41 metrics/test.rmse:  4.474
+2024-10-10 23:19:41 metrics/test.rmse_pcutoff:4.474
+2024-10-10 23:19:41 metrics/test.mAP:   71.376
+2024-10-10 23:19:41 metrics/test.mAR:   78.333
+2024-10-10 23:19:41 metrics/test.rmse_detections:4.474
+2024-10-10 23:19:41 metrics/test.rmse_detections_pcutoff:4.474
+2024-10-10 23:19:41 Epoch 80/200 (lr=0.0001), train loss 0.00073, valid loss 0.00258
+2024-10-10 23:20:00 Number of iterations: 100, loss: 0.00048, lr: 0.0001
+2024-10-10 23:20:19 Number of iterations: 200, loss: 0.00040, lr: 0.0001
+2024-10-10 23:20:38 Number of iterations: 300, loss: 0.00037, lr: 0.0001
+2024-10-10 23:20:46 Epoch 81/200 (lr=0.0001), train loss 0.00068
+2024-10-10 23:21:05 Number of iterations: 100, loss: 0.00022, lr: 0.0001
+2024-10-10 23:21:25 Number of iterations: 200, loss: 0.00083, lr: 0.0001
+2024-10-10 23:21:45 Number of iterations: 300, loss: 0.00067, lr: 0.0001
+2024-10-10 23:21:52 Epoch 82/200 (lr=0.0001), train loss 0.00082
+2024-10-10 23:22:11 Number of iterations: 100, loss: 0.00032, lr: 0.0001
+2024-10-10 23:22:32 Number of iterations: 200, loss: 0.00034, lr: 0.0001
+2024-10-10 23:22:51 Number of iterations: 300, loss: 0.00033, lr: 0.0001
+2024-10-10 23:22:59 Epoch 83/200 (lr=0.0001), train loss 0.00076
+2024-10-10 23:23:17 Number of iterations: 100, loss: 0.00027, lr: 0.0001
+2024-10-10 23:23:38 Number of iterations: 200, loss: 0.00029, lr: 0.0001
+2024-10-10 23:23:58 Number of iterations: 300, loss: 0.00065, lr: 0.0001
+2024-10-10 23:24:05 Epoch 84/200 (lr=0.0001), train loss 0.00071
+2024-10-10 23:24:26 Number of iterations: 100, loss: 0.00080, lr: 0.0001
+2024-10-10 23:24:45 Number of iterations: 200, loss: 0.00197, lr: 0.0001
+2024-10-10 23:25:04 Number of iterations: 300, loss: 0.00082, lr: 0.0001
+2024-10-10 23:25:12 Epoch 85/200 (lr=0.0001), train loss 0.00071
+2024-10-10 23:25:31 Number of iterations: 100, loss: 0.00028, lr: 0.0001
+2024-10-10 23:25:51 Number of iterations: 200, loss: 0.00038, lr: 0.0001
+2024-10-10 23:26:12 Number of iterations: 300, loss: 0.00189, lr: 0.0001
+2024-10-10 23:26:19 Epoch 86/200 (lr=0.0001), train loss 0.00069
+2024-10-10 23:26:40 Number of iterations: 100, loss: 0.00064, lr: 0.0001
+2024-10-10 23:26:59 Number of iterations: 200, loss: 0.00070, lr: 0.0001
+2024-10-10 23:27:19 Number of iterations: 300, loss: 0.00021, lr: 0.0001
+2024-10-10 23:27:26 Epoch 87/200 (lr=0.0001), train loss 0.00071
+2024-10-10 23:27:45 Number of iterations: 100, loss: 0.00040, lr: 0.0001
+2024-10-10 23:28:05 Number of iterations: 200, loss: 0.00035, lr: 0.0001
+2024-10-10 23:28:24 Number of iterations: 300, loss: 0.00063, lr: 0.0001
+2024-10-10 23:28:32 Epoch 88/200 (lr=0.0001), train loss 0.00072
+2024-10-10 23:28:54 Number of iterations: 100, loss: 0.00090, lr: 0.0001
+2024-10-10 23:29:12 Number of iterations: 200, loss: 0.00082, lr: 0.0001
+2024-10-10 23:29:31 Number of iterations: 300, loss: 0.00142, lr: 0.0001
+2024-10-10 23:29:39 Epoch 89/200 (lr=0.0001), train loss 0.00067
+2024-10-10 23:29:57 Number of iterations: 100, loss: 0.00067, lr: 0.0001
+2024-10-10 23:30:15 Number of iterations: 200, loss: 0.00147, lr: 0.0001
+2024-10-10 23:30:34 Number of iterations: 300, loss: 0.00024, lr: 0.0001
+2024-10-10 23:30:42 Training for epoch 90 done, starting evaluation
+2024-10-10 23:30:44 Epoch 90 performance:
+2024-10-10 23:30:44 metrics/test.rmse:  4.101
+2024-10-10 23:30:44 metrics/test.rmse_pcutoff:4.101
+2024-10-10 23:30:44 metrics/test.mAP:   75.449
+2024-10-10 23:30:44 metrics/test.mAR:   81.667
+2024-10-10 23:30:44 metrics/test.rmse_detections:4.101
+2024-10-10 23:30:44 metrics/test.rmse_detections_pcutoff:4.101
+2024-10-10 23:30:44 Epoch 90/200 (lr=0.0001), train loss 0.00071, valid loss 0.00238
+2024-10-10 23:31:03 Number of iterations: 100, loss: 0.00064, lr: 0.0001
+2024-10-10 23:31:21 Number of iterations: 200, loss: 0.00032, lr: 0.0001
+2024-10-10 23:31:39 Number of iterations: 300, loss: 0.00035, lr: 0.0001
+2024-10-10 23:31:47 Epoch 91/200 (lr=0.0001), train loss 0.00066
+2024-10-10 23:32:08 Number of iterations: 100, loss: 0.00048, lr: 0.0001
+2024-10-10 23:32:27 Number of iterations: 200, loss: 0.00101, lr: 0.0001
+2024-10-10 23:32:45 Number of iterations: 300, loss: 0.00132, lr: 0.0001
+2024-10-10 23:32:53 Epoch 92/200 (lr=0.0001), train loss 0.00087
+2024-10-10 23:33:13 Number of iterations: 100, loss: 0.00086, lr: 0.0001
+2024-10-10 23:33:30 Number of iterations: 200, loss: 0.00047, lr: 0.0001
+2024-10-10 23:33:49 Number of iterations: 300, loss: 0.00062, lr: 0.0001
+2024-10-10 23:33:56 Epoch 93/200 (lr=0.0001), train loss 0.00074
+2024-10-10 23:34:15 Number of iterations: 100, loss: 0.00113, lr: 0.0001
+2024-10-10 23:34:35 Number of iterations: 200, loss: 0.00140, lr: 0.0001
+2024-10-10 23:34:54 Number of iterations: 300, loss: 0.00073, lr: 0.0001
+2024-10-10 23:35:01 Epoch 94/200 (lr=0.0001), train loss 0.00062
+2024-10-10 23:35:21 Number of iterations: 100, loss: 0.00064, lr: 0.0001
+2024-10-10 23:35:41 Number of iterations: 200, loss: 0.00060, lr: 0.0001
+2024-10-10 23:36:02 Number of iterations: 300, loss: 0.00076, lr: 0.0001
+2024-10-10 23:36:09 Epoch 95/200 (lr=0.0001), train loss 0.00064
+2024-10-10 23:36:28 Number of iterations: 100, loss: 0.00059, lr: 0.0001
+2024-10-10 23:36:49 Number of iterations: 200, loss: 0.00057, lr: 0.0001
+2024-10-10 23:37:09 Number of iterations: 300, loss: 0.00191, lr: 0.0001
+2024-10-10 23:37:17 Epoch 96/200 (lr=0.0001), train loss 0.00070
+2024-10-10 23:37:37 Number of iterations: 100, loss: 0.00125, lr: 0.0001
+2024-10-10 23:37:57 Number of iterations: 200, loss: 0.00043, lr: 0.0001
+2024-10-10 23:38:18 Number of iterations: 300, loss: 0.00047, lr: 0.0001
+2024-10-10 23:38:25 Epoch 97/200 (lr=0.0001), train loss 0.00064
+2024-10-10 23:38:45 Number of iterations: 100, loss: 0.00036, lr: 0.0001
+2024-10-10 23:39:04 Number of iterations: 200, loss: 0.00079, lr: 0.0001
+2024-10-10 23:39:24 Number of iterations: 300, loss: 0.00069, lr: 0.0001
+2024-10-10 23:39:31 Epoch 98/200 (lr=0.0001), train loss 0.00070
+2024-10-10 23:39:51 Number of iterations: 100, loss: 0.00062, lr: 0.0001
+2024-10-10 23:40:10 Number of iterations: 200, loss: 0.00065, lr: 0.0001
+2024-10-10 23:40:30 Number of iterations: 300, loss: 0.00051, lr: 0.0001
+2024-10-10 23:40:37 Epoch 99/200 (lr=0.0001), train loss 0.00062
+2024-10-10 23:40:57 Number of iterations: 100, loss: 0.00132, lr: 0.0001
+2024-10-10 23:41:16 Number of iterations: 200, loss: 0.00041, lr: 0.0001
+2024-10-10 23:41:37 Number of iterations: 300, loss: 0.00031, lr: 0.0001
+2024-10-10 23:41:44 Training for epoch 100 done, starting evaluation
+2024-10-10 23:41:46 Epoch 100 performance:
+2024-10-10 23:41:46 metrics/test.rmse:  4.312
+2024-10-10 23:41:46 metrics/test.rmse_pcutoff:4.312
+2024-10-10 23:41:46 metrics/test.mAP:   73.209
+2024-10-10 23:41:46 metrics/test.mAR:   80.000
+2024-10-10 23:41:46 metrics/test.rmse_detections:4.312
+2024-10-10 23:41:46 metrics/test.rmse_detections_pcutoff:4.312
+2024-10-10 23:41:46 Epoch 100/200 (lr=0.0001), train loss 0.00068, valid loss 0.00249
+2024-10-10 23:42:07 Number of iterations: 100, loss: 0.00046, lr: 0.0001
+2024-10-10 23:42:28 Number of iterations: 200, loss: 0.00081, lr: 0.0001
+2024-10-10 23:42:49 Number of iterations: 300, loss: 0.00045, lr: 0.0001
+2024-10-10 23:42:57 Epoch 101/200 (lr=0.0001), train loss 0.00065
+2024-10-10 23:43:16 Number of iterations: 100, loss: 0.00037, lr: 0.0001
+2024-10-10 23:43:36 Number of iterations: 200, loss: 0.00052, lr: 0.0001
+2024-10-10 23:43:57 Number of iterations: 300, loss: 0.00021, lr: 0.0001
+2024-10-10 23:44:05 Epoch 102/200 (lr=0.0001), train loss 0.00064
+2024-10-10 23:44:26 Number of iterations: 100, loss: 0.00052, lr: 0.0001
+2024-10-10 23:44:45 Number of iterations: 200, loss: 0.00035, lr: 0.0001
+2024-10-10 23:45:04 Number of iterations: 300, loss: 0.00048, lr: 0.0001
+2024-10-10 23:45:13 Epoch 103/200 (lr=0.0001), train loss 0.00065
+2024-10-10 23:45:33 Number of iterations: 100, loss: 0.00070, lr: 0.0001
+2024-10-10 23:45:52 Number of iterations: 200, loss: 0.00171, lr: 0.0001
+2024-10-10 23:46:12 Number of iterations: 300, loss: 0.00020, lr: 0.0001
+2024-10-10 23:46:20 Epoch 104/200 (lr=0.0001), train loss 0.00064
+2024-10-10 23:46:40 Number of iterations: 100, loss: 0.00098, lr: 0.0001
+2024-10-10 23:47:00 Number of iterations: 200, loss: 0.00026, lr: 0.0001
+2024-10-10 23:47:20 Number of iterations: 300, loss: 0.00078, lr: 0.0001
+2024-10-10 23:47:28 Epoch 105/200 (lr=0.0001), train loss 0.00069
+2024-10-10 23:47:49 Number of iterations: 100, loss: 0.00094, lr: 0.0001
+2024-10-10 23:48:09 Number of iterations: 200, loss: 0.00050, lr: 0.0001
+2024-10-10 23:48:27 Number of iterations: 300, loss: 0.00031, lr: 0.0001
+2024-10-10 23:48:34 Epoch 106/200 (lr=0.0001), train loss 0.00069
+2024-10-10 23:48:55 Number of iterations: 100, loss: 0.00073, lr: 0.0001
+2024-10-10 23:49:16 Number of iterations: 200, loss: 0.00061, lr: 0.0001
+2024-10-10 23:49:36 Number of iterations: 300, loss: 0.00064, lr: 0.0001
+2024-10-10 23:49:44 Epoch 107/200 (lr=0.0001), train loss 0.00062
+2024-10-10 23:50:03 Number of iterations: 100, loss: 0.00081, lr: 0.0001
+2024-10-10 23:50:23 Number of iterations: 200, loss: 0.00027, lr: 0.0001
+2024-10-10 23:50:43 Number of iterations: 300, loss: 0.00066, lr: 0.0001
+2024-10-10 23:50:51 Epoch 108/200 (lr=0.0001), train loss 0.00059
+2024-10-10 23:51:09 Number of iterations: 100, loss: 0.00029, lr: 0.0001
+2024-10-10 23:51:28 Number of iterations: 200, loss: 0.00153, lr: 0.0001
+2024-10-10 23:51:47 Number of iterations: 300, loss: 0.00030, lr: 0.0001
+2024-10-10 23:51:55 Epoch 109/200 (lr=0.0001), train loss 0.00063
+2024-10-10 23:52:15 Number of iterations: 100, loss: 0.00100, lr: 0.0001
+2024-10-10 23:52:34 Number of iterations: 200, loss: 0.00131, lr: 0.0001
+2024-10-10 23:52:54 Number of iterations: 300, loss: 0.00044, lr: 0.0001
+2024-10-10 23:53:02 Training for epoch 110 done, starting evaluation
+2024-10-10 23:53:04 Epoch 110 performance:
+2024-10-10 23:53:04 metrics/test.rmse:  4.196
+2024-10-10 23:53:04 metrics/test.rmse_pcutoff:4.196
+2024-10-10 23:53:04 metrics/test.mAP:   71.864
+2024-10-10 23:53:04 metrics/test.mAR:   81.111
+2024-10-10 23:53:04 metrics/test.rmse_detections:4.196
+2024-10-10 23:53:04 metrics/test.rmse_detections_pcutoff:4.196
+2024-10-10 23:53:04 Epoch 110/200 (lr=0.0001), train loss 0.00066, valid loss 0.00251
+2024-10-10 23:53:24 Number of iterations: 100, loss: 0.00067, lr: 0.0001
+2024-10-10 23:53:43 Number of iterations: 200, loss: 0.00041, lr: 0.0001
+2024-10-10 23:54:03 Number of iterations: 300, loss: 0.00085, lr: 0.0001
+2024-10-10 23:54:11 Epoch 111/200 (lr=0.0001), train loss 0.00063
+2024-10-10 23:54:30 Number of iterations: 100, loss: 0.00035, lr: 0.0001
+2024-10-10 23:54:50 Number of iterations: 200, loss: 0.00024, lr: 0.0001
+2024-10-10 23:55:09 Number of iterations: 300, loss: 0.00159, lr: 0.0001
+2024-10-10 23:55:17 Epoch 112/200 (lr=0.0001), train loss 0.00059
+2024-10-10 23:55:36 Number of iterations: 100, loss: 0.00085, lr: 0.0001
+2024-10-10 23:55:57 Number of iterations: 200, loss: 0.00099, lr: 0.0001
+2024-10-10 23:56:17 Number of iterations: 300, loss: 0.00045, lr: 0.0001
+2024-10-10 23:56:25 Epoch 113/200 (lr=0.0001), train loss 0.00062
+2024-10-10 23:56:43 Number of iterations: 100, loss: 0.00061, lr: 0.0001
+2024-10-10 23:57:01 Number of iterations: 200, loss: 0.00037, lr: 0.0001
+2024-10-10 23:57:19 Number of iterations: 300, loss: 0.00112, lr: 0.0001
+2024-10-10 23:57:26 Epoch 114/200 (lr=0.0001), train loss 0.00061
+2024-10-10 23:57:47 Number of iterations: 100, loss: 0.00043, lr: 0.0001
+2024-10-10 23:58:07 Number of iterations: 200, loss: 0.00060, lr: 0.0001
+2024-10-10 23:58:26 Number of iterations: 300, loss: 0.00062, lr: 0.0001
+2024-10-10 23:58:34 Epoch 115/200 (lr=0.0001), train loss 0.00061
+2024-10-10 23:58:52 Number of iterations: 100, loss: 0.00109, lr: 0.0001
+2024-10-10 23:59:13 Number of iterations: 200, loss: 0.00072, lr: 0.0001
+2024-10-10 23:59:31 Number of iterations: 300, loss: 0.00058, lr: 0.0001
+2024-10-10 23:59:38 Epoch 116/200 (lr=0.0001), train loss 0.00063
+2024-10-11 00:00:00 Number of iterations: 100, loss: 0.00051, lr: 0.0001
+2024-10-11 00:00:20 Number of iterations: 200, loss: 0.00082, lr: 0.0001
+2024-10-11 00:00:39 Number of iterations: 300, loss: 0.00036, lr: 0.0001
+2024-10-11 00:00:46 Epoch 117/200 (lr=0.0001), train loss 0.00060
+2024-10-11 00:01:07 Number of iterations: 100, loss: 0.00036, lr: 0.0001
+2024-10-11 00:01:26 Number of iterations: 200, loss: 0.00029, lr: 0.0001
+2024-10-11 00:01:45 Number of iterations: 300, loss: 0.00061, lr: 0.0001
+2024-10-11 00:01:54 Epoch 118/200 (lr=0.0001), train loss 0.00060
+2024-10-11 00:02:13 Number of iterations: 100, loss: 0.00018, lr: 0.0001
+2024-10-11 00:02:33 Number of iterations: 200, loss: 0.00020, lr: 0.0001
+2024-10-11 00:02:53 Number of iterations: 300, loss: 0.00102, lr: 0.0001
+2024-10-11 00:03:01 Epoch 119/200 (lr=0.0001), train loss 0.00062
+2024-10-11 00:03:20 Number of iterations: 100, loss: 0.00045, lr: 0.0001
+2024-10-11 00:03:38 Number of iterations: 200, loss: 0.00028, lr: 0.0001
+2024-10-11 00:03:58 Number of iterations: 300, loss: 0.00096, lr: 0.0001
+2024-10-11 00:04:06 Training for epoch 120 done, starting evaluation
+2024-10-11 00:04:08 Epoch 120 performance:
+2024-10-11 00:04:08 metrics/test.rmse:  4.327
+2024-10-11 00:04:08 metrics/test.rmse_pcutoff:4.327
+2024-10-11 00:04:08 metrics/test.mAP:   72.355
+2024-10-11 00:04:08 metrics/test.mAR:   78.889
+2024-10-11 00:04:08 metrics/test.rmse_detections:4.327
+2024-10-11 00:04:08 metrics/test.rmse_detections_pcutoff:4.327
+2024-10-11 00:04:08 Epoch 120/200 (lr=0.0001), train loss 0.00061, valid loss 0.00261
+2024-10-11 00:04:27 Number of iterations: 100, loss: 0.00054, lr: 0.0001
+2024-10-11 00:04:45 Number of iterations: 200, loss: 0.00181, lr: 0.0001
+2024-10-11 00:05:04 Number of iterations: 300, loss: 0.00090, lr: 0.0001
+2024-10-11 00:05:11 Epoch 121/200 (lr=0.0001), train loss 0.00062
+2024-10-11 00:05:30 Number of iterations: 100, loss: 0.00103, lr: 0.0001
+2024-10-11 00:05:50 Number of iterations: 200, loss: 0.00119, lr: 0.0001
+2024-10-11 00:06:11 Number of iterations: 300, loss: 0.00027, lr: 0.0001
+2024-10-11 00:06:19 Epoch 122/200 (lr=0.0001), train loss 0.00060
+2024-10-11 00:06:40 Number of iterations: 100, loss: 0.00042, lr: 0.0001
+2024-10-11 00:07:00 Number of iterations: 200, loss: 0.00036, lr: 0.0001
+2024-10-11 00:07:18 Number of iterations: 300, loss: 0.00074, lr: 0.0001
+2024-10-11 00:07:26 Epoch 123/200 (lr=0.0001), train loss 0.00058
+2024-10-11 00:07:45 Number of iterations: 100, loss: 0.00042, lr: 0.0001
+2024-10-11 00:08:04 Number of iterations: 200, loss: 0.00032, lr: 0.0001
+2024-10-11 00:08:24 Number of iterations: 300, loss: 0.00123, lr: 0.0001
+2024-10-11 00:08:32 Epoch 124/200 (lr=0.0001), train loss 0.00060
+2024-10-11 00:08:52 Number of iterations: 100, loss: 0.00087, lr: 0.0001
+2024-10-11 00:09:10 Number of iterations: 200, loss: 0.00061, lr: 0.0001
+2024-10-11 00:09:29 Number of iterations: 300, loss: 0.00101, lr: 0.0001
+2024-10-11 00:09:38 Epoch 125/200 (lr=0.0001), train loss 0.00061
+2024-10-11 00:09:58 Number of iterations: 100, loss: 0.00088, lr: 0.0001
+2024-10-11 00:10:18 Number of iterations: 200, loss: 0.00049, lr: 0.0001
+2024-10-11 00:10:38 Number of iterations: 300, loss: 0.00029, lr: 0.0001
+2024-10-11 00:10:46 Epoch 126/200 (lr=0.0001), train loss 0.00063
+2024-10-11 00:11:06 Number of iterations: 100, loss: 0.00027, lr: 0.0001
+2024-10-11 00:11:25 Number of iterations: 200, loss: 0.00056, lr: 0.0001
+2024-10-11 00:11:44 Number of iterations: 300, loss: 0.00037, lr: 0.0001
+2024-10-11 00:11:51 Epoch 127/200 (lr=0.0001), train loss 0.00057
+2024-10-11 00:12:10 Number of iterations: 100, loss: 0.00106, lr: 0.0001
+2024-10-11 00:12:29 Number of iterations: 200, loss: 0.00109, lr: 0.0001
+2024-10-11 00:12:47 Number of iterations: 300, loss: 0.00066, lr: 0.0001
+2024-10-11 00:12:55 Epoch 128/200 (lr=0.0001), train loss 0.00061
+2024-10-11 00:13:14 Number of iterations: 100, loss: 0.00031, lr: 0.0001
+2024-10-11 00:13:34 Number of iterations: 200, loss: 0.00054, lr: 0.0001
+2024-10-11 00:13:54 Number of iterations: 300, loss: 0.00029, lr: 0.0001
+2024-10-11 00:14:02 Epoch 129/200 (lr=0.0001), train loss 0.00057
+2024-10-11 00:14:21 Number of iterations: 100, loss: 0.00055, lr: 0.0001
+2024-10-11 00:14:40 Number of iterations: 200, loss: 0.00061, lr: 0.0001
+2024-10-11 00:14:59 Number of iterations: 300, loss: 0.00023, lr: 0.0001
+2024-10-11 00:15:06 Training for epoch 130 done, starting evaluation
+2024-10-11 00:15:08 Epoch 130 performance:
+2024-10-11 00:15:08 metrics/test.rmse:  4.070
+2024-10-11 00:15:08 metrics/test.rmse_pcutoff:4.070
+2024-10-11 00:15:08 metrics/test.mAP:   75.545
+2024-10-11 00:15:08 metrics/test.mAR:   82.222
+2024-10-11 00:15:08 metrics/test.rmse_detections:4.070
+2024-10-11 00:15:08 metrics/test.rmse_detections_pcutoff:4.070
+2024-10-11 00:15:08 Epoch 130/200 (lr=0.0001), train loss 0.00056, valid loss 0.00229
+2024-10-11 00:15:27 Number of iterations: 100, loss: 0.00107, lr: 0.0001
+2024-10-11 00:15:46 Number of iterations: 200, loss: 0.00105, lr: 0.0001
+2024-10-11 00:16:06 Number of iterations: 300, loss: 0.00114, lr: 0.0001
+2024-10-11 00:16:13 Epoch 131/200 (lr=0.0001), train loss 0.00056
+2024-10-11 00:16:33 Number of iterations: 100, loss: 0.00057, lr: 0.0001
+2024-10-11 00:16:52 Number of iterations: 200, loss: 0.00017, lr: 0.0001
+2024-10-11 00:17:12 Number of iterations: 300, loss: 0.00019, lr: 0.0001
+2024-10-11 00:17:20 Epoch 132/200 (lr=0.0001), train loss 0.00054
+2024-10-11 00:17:40 Number of iterations: 100, loss: 0.00022, lr: 0.0001
+2024-10-11 00:17:58 Number of iterations: 200, loss: 0.00043, lr: 0.0001
+2024-10-11 00:18:18 Number of iterations: 300, loss: 0.00041, lr: 0.0001
+2024-10-11 00:18:26 Epoch 133/200 (lr=0.0001), train loss 0.00057
+2024-10-11 00:18:46 Number of iterations: 100, loss: 0.00065, lr: 0.0001
+2024-10-11 00:19:07 Number of iterations: 200, loss: 0.00099, lr: 0.0001
+2024-10-11 00:19:26 Number of iterations: 300, loss: 0.00040, lr: 0.0001
+2024-10-11 00:19:34 Epoch 134/200 (lr=0.0001), train loss 0.00056
+2024-10-11 00:19:54 Number of iterations: 100, loss: 0.00054, lr: 0.0001
+2024-10-11 00:20:15 Number of iterations: 200, loss: 0.00046, lr: 0.0001
+2024-10-11 00:20:33 Number of iterations: 300, loss: 0.00039, lr: 0.0001
+2024-10-11 00:20:41 Epoch 135/200 (lr=0.0001), train loss 0.00058
+2024-10-11 00:20:59 Number of iterations: 100, loss: 0.00028, lr: 0.0001
+2024-10-11 00:21:18 Number of iterations: 200, loss: 0.00053, lr: 0.0001
+2024-10-11 00:21:37 Number of iterations: 300, loss: 0.00058, lr: 0.0001
+2024-10-11 00:21:44 Epoch 136/200 (lr=0.0001), train loss 0.00059
+2024-10-11 00:22:03 Number of iterations: 100, loss: 0.00376, lr: 0.0001
+2024-10-11 00:22:23 Number of iterations: 200, loss: 0.00037, lr: 0.0001
+2024-10-11 00:22:42 Number of iterations: 300, loss: 0.00062, lr: 0.0001
+2024-10-11 00:22:50 Epoch 137/200 (lr=0.0001), train loss 0.00056
+2024-10-11 00:23:09 Number of iterations: 100, loss: 0.00122, lr: 0.0001
+2024-10-11 00:23:29 Number of iterations: 200, loss: 0.00043, lr: 0.0001
+2024-10-11 00:23:48 Number of iterations: 300, loss: 0.00357, lr: 0.0001
+2024-10-11 00:23:56 Epoch 138/200 (lr=0.0001), train loss 0.00059
+2024-10-11 00:24:18 Number of iterations: 100, loss: 0.00042, lr: 0.0001
+2024-10-11 00:24:36 Number of iterations: 200, loss: 0.00027, lr: 0.0001
+2024-10-11 00:24:55 Number of iterations: 300, loss: 0.00031, lr: 0.0001
+2024-10-11 00:25:03 Epoch 139/200 (lr=0.0001), train loss 0.00054
+2024-10-11 00:25:24 Number of iterations: 100, loss: 0.00031, lr: 0.0001
+2024-10-11 00:25:42 Number of iterations: 200, loss: 0.00027, lr: 0.0001
+2024-10-11 00:26:03 Number of iterations: 300, loss: 0.00132, lr: 0.0001
+2024-10-11 00:26:11 Training for epoch 140 done, starting evaluation
+2024-10-11 00:26:13 Epoch 140 performance:
+2024-10-11 00:26:13 metrics/test.rmse:  4.083
+2024-10-11 00:26:13 metrics/test.rmse_pcutoff:4.083
+2024-10-11 00:26:13 metrics/test.mAP:   74.407
+2024-10-11 00:26:13 metrics/test.mAR:   81.667
+2024-10-11 00:26:13 metrics/test.rmse_detections:4.083
+2024-10-11 00:26:13 metrics/test.rmse_detections_pcutoff:4.083
+2024-10-11 00:26:13 Epoch 140/200 (lr=0.0001), train loss 0.00055, valid loss 0.00235
+2024-10-11 00:26:32 Number of iterations: 100, loss: 0.00023, lr: 0.0001
+2024-10-11 00:26:52 Number of iterations: 200, loss: 0.00045, lr: 0.0001
+2024-10-11 00:27:10 Number of iterations: 300, loss: 0.00035, lr: 0.0001
+2024-10-11 00:27:18 Epoch 141/200 (lr=0.0001), train loss 0.00056
+2024-10-11 00:27:36 Number of iterations: 100, loss: 0.00057, lr: 0.0001
+2024-10-11 00:27:55 Number of iterations: 200, loss: 0.00064, lr: 0.0001
+2024-10-11 00:28:16 Number of iterations: 300, loss: 0.00021, lr: 0.0001
+2024-10-11 00:28:23 Epoch 142/200 (lr=0.0001), train loss 0.00052
+2024-10-11 00:28:43 Number of iterations: 100, loss: 0.00036, lr: 0.0001
+2024-10-11 00:29:02 Number of iterations: 200, loss: 0.00122, lr: 0.0001
+2024-10-11 00:29:22 Number of iterations: 300, loss: 0.00037, lr: 0.0001
+2024-10-11 00:29:30 Epoch 143/200 (lr=0.0001), train loss 0.00054
+2024-10-11 00:29:49 Number of iterations: 100, loss: 0.00027, lr: 0.0001
+2024-10-11 00:30:08 Number of iterations: 200, loss: 0.00025, lr: 0.0001
+2024-10-11 00:30:27 Number of iterations: 300, loss: 0.00249, lr: 0.0001
+2024-10-11 00:30:34 Epoch 144/200 (lr=0.0001), train loss 0.00053
+2024-10-11 00:30:52 Number of iterations: 100, loss: 0.00030, lr: 0.0001
+2024-10-11 00:31:12 Number of iterations: 200, loss: 0.00048, lr: 0.0001
+2024-10-11 00:31:31 Number of iterations: 300, loss: 0.00107, lr: 0.0001
+2024-10-11 00:31:38 Epoch 145/200 (lr=0.0001), train loss 0.00055
+2024-10-11 00:31:56 Number of iterations: 100, loss: 0.00029, lr: 0.0001
+2024-10-11 00:32:15 Number of iterations: 200, loss: 0.00031, lr: 0.0001
+2024-10-11 00:32:36 Number of iterations: 300, loss: 0.00038, lr: 0.0001
+2024-10-11 00:32:44 Epoch 146/200 (lr=0.0001), train loss 0.00058
+2024-10-11 00:33:03 Number of iterations: 100, loss: 0.00059, lr: 0.0001
+2024-10-11 00:33:22 Number of iterations: 200, loss: 0.00047, lr: 0.0001
+2024-10-11 00:33:42 Number of iterations: 300, loss: 0.00037, lr: 0.0001
+2024-10-11 00:33:50 Epoch 147/200 (lr=0.0001), train loss 0.00053
+2024-10-11 00:34:09 Number of iterations: 100, loss: 0.00046, lr: 0.0001
+2024-10-11 00:34:28 Number of iterations: 200, loss: 0.00018, lr: 0.0001
+2024-10-11 00:34:47 Number of iterations: 300, loss: 0.00035, lr: 0.0001
+2024-10-11 00:34:54 Epoch 148/200 (lr=0.0001), train loss 0.00057
+2024-10-11 00:35:13 Number of iterations: 100, loss: 0.00034, lr: 0.0001
+2024-10-11 00:35:32 Number of iterations: 200, loss: 0.00038, lr: 0.0001
+2024-10-11 00:35:51 Number of iterations: 300, loss: 0.00030, lr: 0.0001
+2024-10-11 00:35:59 Epoch 149/200 (lr=0.0001), train loss 0.00057
+2024-10-11 00:36:20 Number of iterations: 100, loss: 0.00046, lr: 0.0001
+2024-10-11 00:36:39 Number of iterations: 200, loss: 0.00033, lr: 0.0001
+2024-10-11 00:36:57 Number of iterations: 300, loss: 0.00072, lr: 0.0001
+2024-10-11 00:37:05 Training for epoch 150 done, starting evaluation
+2024-10-11 00:37:07 Epoch 150 performance:
+2024-10-11 00:37:07 metrics/test.rmse:  4.133
+2024-10-11 00:37:07 metrics/test.rmse_pcutoff:4.133
+2024-10-11 00:37:07 metrics/test.mAP:   73.370
+2024-10-11 00:37:07 metrics/test.mAR:   80.000
+2024-10-11 00:37:07 metrics/test.rmse_detections:4.133
+2024-10-11 00:37:07 metrics/test.rmse_detections_pcutoff:4.133
+2024-10-11 00:37:07 Epoch 150/200 (lr=0.0001), train loss 0.00051, valid loss 0.00244
+2024-10-11 00:37:27 Number of iterations: 100, loss: 0.00047, lr: 0.0001
+2024-10-11 00:37:48 Number of iterations: 200, loss: 0.00070, lr: 0.0001
+2024-10-11 00:38:09 Number of iterations: 300, loss: 0.00046, lr: 0.0001
+2024-10-11 00:38:17 Epoch 151/200 (lr=0.0001), train loss 0.00052
+2024-10-11 00:38:37 Number of iterations: 100, loss: 0.00020, lr: 0.0001
+2024-10-11 00:38:56 Number of iterations: 200, loss: 0.00115, lr: 0.0001
+2024-10-11 00:39:15 Number of iterations: 300, loss: 0.00029, lr: 0.0001
+2024-10-11 00:39:23 Epoch 152/200 (lr=0.0001), train loss 0.00052
+2024-10-11 00:39:44 Number of iterations: 100, loss: 0.00018, lr: 0.0001
+2024-10-11 00:40:04 Number of iterations: 200, loss: 0.00207, lr: 0.0001
+2024-10-11 00:40:24 Number of iterations: 300, loss: 0.00183, lr: 0.0001
+2024-10-11 00:40:32 Epoch 153/200 (lr=0.0001), train loss 0.00053
+2024-10-11 00:40:52 Number of iterations: 100, loss: 0.00035, lr: 0.0001
+2024-10-11 00:41:11 Number of iterations: 200, loss: 0.00059, lr: 0.0001
+2024-10-11 00:41:30 Number of iterations: 300, loss: 0.00060, lr: 0.0001
+2024-10-11 00:41:38 Epoch 154/200 (lr=0.0001), train loss 0.00059
+2024-10-11 00:41:59 Number of iterations: 100, loss: 0.00119, lr: 0.0001
+2024-10-11 00:42:18 Number of iterations: 200, loss: 0.00020, lr: 0.0001
+2024-10-11 00:42:36 Number of iterations: 300, loss: 0.00028, lr: 0.0001
+2024-10-11 00:42:45 Epoch 155/200 (lr=0.0001), train loss 0.00053
+2024-10-11 00:43:03 Number of iterations: 100, loss: 0.00188, lr: 0.0001
+2024-10-11 00:43:23 Number of iterations: 200, loss: 0.00036, lr: 0.0001
+2024-10-11 00:43:43 Number of iterations: 300, loss: 0.00097, lr: 0.0001
+2024-10-11 00:43:51 Epoch 156/200 (lr=0.0001), train loss 0.00057
+2024-10-11 00:44:12 Number of iterations: 100, loss: 0.00043, lr: 0.0001
+2024-10-11 00:44:31 Number of iterations: 200, loss: 0.00040, lr: 0.0001
+2024-10-11 00:44:49 Number of iterations: 300, loss: 0.00068, lr: 0.0001
+2024-10-11 00:44:58 Epoch 157/200 (lr=0.0001), train loss 0.00060
+2024-10-11 00:45:18 Number of iterations: 100, loss: 0.00057, lr: 0.0001
+2024-10-11 00:45:37 Number of iterations: 200, loss: 0.00050, lr: 0.0001
+2024-10-11 00:45:55 Number of iterations: 300, loss: 0.00040, lr: 0.0001
+2024-10-11 00:46:04 Epoch 158/200 (lr=0.0001), train loss 0.00050
+2024-10-11 00:46:23 Number of iterations: 100, loss: 0.00018, lr: 0.0001
+2024-10-11 00:46:43 Number of iterations: 200, loss: 0.00021, lr: 0.0001
+2024-10-11 00:47:02 Number of iterations: 300, loss: 0.00030, lr: 0.0001
+2024-10-11 00:47:09 Epoch 159/200 (lr=0.0001), train loss 0.00051
+2024-10-11 00:47:27 Number of iterations: 100, loss: 0.00018, lr: 0.0001
+2024-10-11 00:47:45 Number of iterations: 200, loss: 0.00022, lr: 0.0001
+2024-10-11 00:48:05 Number of iterations: 300, loss: 0.00132, lr: 0.0001
+2024-10-11 00:48:13 Training for epoch 160 done, starting evaluation
+2024-10-11 00:48:15 Epoch 160 performance:
+2024-10-11 00:48:15 metrics/test.rmse:  4.323
+2024-10-11 00:48:15 metrics/test.rmse_pcutoff:4.323
+2024-10-11 00:48:15 metrics/test.mAP:   75.140
+2024-10-11 00:48:15 metrics/test.mAR:   80.556
+2024-10-11 00:48:15 metrics/test.rmse_detections:4.323
+2024-10-11 00:48:15 metrics/test.rmse_detections_pcutoff:4.323
+2024-10-11 00:48:15 Epoch 160/200 (lr=1e-05), train loss 0.00051, valid loss 0.00250
+2024-10-11 00:48:35 Number of iterations: 100, loss: 0.00110, lr: 1e-05
+2024-10-11 00:48:54 Number of iterations: 200, loss: 0.00018, lr: 1e-05
+2024-10-11 00:49:15 Number of iterations: 300, loss: 0.00026, lr: 1e-05
+2024-10-11 00:49:23 Epoch 161/200 (lr=1e-05), train loss 0.00047
+2024-10-11 00:49:43 Number of iterations: 100, loss: 0.00042, lr: 1e-05
+2024-10-11 00:50:02 Number of iterations: 200, loss: 0.00037, lr: 1e-05
+2024-10-11 00:50:22 Number of iterations: 300, loss: 0.00018, lr: 1e-05
+2024-10-11 00:50:31 Epoch 162/200 (lr=1e-05), train loss 0.00042
+2024-10-11 00:50:51 Number of iterations: 100, loss: 0.00065, lr: 1e-05
+2024-10-11 00:51:10 Number of iterations: 200, loss: 0.00023, lr: 1e-05
+2024-10-11 00:51:29 Number of iterations: 300, loss: 0.00012, lr: 1e-05
+2024-10-11 00:51:37 Epoch 163/200 (lr=1e-05), train loss 0.00040
+2024-10-11 00:51:56 Number of iterations: 100, loss: 0.00056, lr: 1e-05
+2024-10-11 00:52:15 Number of iterations: 200, loss: 0.00010, lr: 1e-05
+2024-10-11 00:52:35 Number of iterations: 300, loss: 0.00027, lr: 1e-05
+2024-10-11 00:52:44 Epoch 164/200 (lr=1e-05), train loss 0.00039
+2024-10-11 00:53:03 Number of iterations: 100, loss: 0.00038, lr: 1e-05
+2024-10-11 00:53:21 Number of iterations: 200, loss: 0.00018, lr: 1e-05
+2024-10-11 00:53:40 Number of iterations: 300, loss: 0.00032, lr: 1e-05
+2024-10-11 00:53:48 Epoch 165/200 (lr=1e-05), train loss 0.00038
+2024-10-11 00:54:07 Number of iterations: 100, loss: 0.00014, lr: 1e-05
+2024-10-11 00:54:26 Number of iterations: 200, loss: 0.00019, lr: 1e-05
+2024-10-11 00:54:47 Number of iterations: 300, loss: 0.00048, lr: 1e-05
+2024-10-11 00:54:54 Epoch 166/200 (lr=1e-05), train loss 0.00037
+2024-10-11 00:55:14 Number of iterations: 100, loss: 0.00112, lr: 1e-05
+2024-10-11 00:55:33 Number of iterations: 200, loss: 0.00019, lr: 1e-05
+2024-10-11 00:55:53 Number of iterations: 300, loss: 0.00017, lr: 1e-05
+2024-10-11 00:56:02 Epoch 167/200 (lr=1e-05), train loss 0.00036
+2024-10-11 00:56:19 Number of iterations: 100, loss: 0.00068, lr: 1e-05
+2024-10-11 00:56:38 Number of iterations: 200, loss: 0.00025, lr: 1e-05
+2024-10-11 00:56:56 Number of iterations: 300, loss: 0.00017, lr: 1e-05
+2024-10-11 00:57:04 Epoch 168/200 (lr=1e-05), train loss 0.00036
+2024-10-11 00:57:22 Number of iterations: 100, loss: 0.00015, lr: 1e-05
+2024-10-11 00:57:41 Number of iterations: 200, loss: 0.00019, lr: 1e-05
+2024-10-11 00:58:01 Number of iterations: 300, loss: 0.00012, lr: 1e-05
+2024-10-11 00:58:09 Epoch 169/200 (lr=1e-05), train loss 0.00034
+2024-10-11 00:58:28 Number of iterations: 100, loss: 0.00100, lr: 1e-05
+2024-10-11 00:58:46 Number of iterations: 200, loss: 0.00009, lr: 1e-05
+2024-10-11 00:59:07 Number of iterations: 300, loss: 0.00097, lr: 1e-05
+2024-10-11 00:59:15 Training for epoch 170 done, starting evaluation
+2024-10-11 00:59:16 Epoch 170 performance:
+2024-10-11 00:59:16 metrics/test.rmse:  4.105
+2024-10-11 00:59:16 metrics/test.rmse_pcutoff:4.105
+2024-10-11 00:59:16 metrics/test.mAP:   76.314
+2024-10-11 00:59:16 metrics/test.mAR:   82.778
+2024-10-11 00:59:16 metrics/test.rmse_detections:4.105
+2024-10-11 00:59:16 metrics/test.rmse_detections_pcutoff:4.105
+2024-10-11 00:59:16 Epoch 170/200 (lr=1e-05), train loss 0.00035, valid loss 0.00237
+2024-10-11 00:59:36 Number of iterations: 100, loss: 0.00131, lr: 1e-05
+2024-10-11 00:59:55 Number of iterations: 200, loss: 0.00053, lr: 1e-05
+2024-10-11 01:00:14 Number of iterations: 300, loss: 0.00045, lr: 1e-05
+2024-10-11 01:00:22 Epoch 171/200 (lr=1e-05), train loss 0.00037
+2024-10-11 01:00:40 Number of iterations: 100, loss: 0.00021, lr: 1e-05
+2024-10-11 01:01:00 Number of iterations: 200, loss: 0.00013, lr: 1e-05
+2024-10-11 01:01:21 Number of iterations: 300, loss: 0.00039, lr: 1e-05
+2024-10-11 01:01:29 Epoch 172/200 (lr=1e-05), train loss 0.00035
+2024-10-11 01:01:48 Number of iterations: 100, loss: 0.00023, lr: 1e-05
+2024-10-11 01:02:08 Number of iterations: 200, loss: 0.00027, lr: 1e-05
+2024-10-11 01:02:28 Number of iterations: 300, loss: 0.00031, lr: 1e-05
+2024-10-11 01:02:36 Epoch 173/200 (lr=1e-05), train loss 0.00034
+2024-10-11 01:02:55 Number of iterations: 100, loss: 0.00087, lr: 1e-05
+2024-10-11 01:03:15 Number of iterations: 200, loss: 0.00017, lr: 1e-05
+2024-10-11 01:03:35 Number of iterations: 300, loss: 0.00018, lr: 1e-05
+2024-10-11 01:03:43 Epoch 174/200 (lr=1e-05), train loss 0.00034
+2024-10-11 01:04:02 Number of iterations: 100, loss: 0.00020, lr: 1e-05
+2024-10-11 01:04:23 Number of iterations: 200, loss: 0.00010, lr: 1e-05
+2024-10-11 01:04:41 Number of iterations: 300, loss: 0.00032, lr: 1e-05
+2024-10-11 01:04:49 Epoch 175/200 (lr=1e-05), train loss 0.00035
+2024-10-11 01:05:09 Number of iterations: 100, loss: 0.00012, lr: 1e-05
+2024-10-11 01:05:29 Number of iterations: 200, loss: 0.00023, lr: 1e-05
+2024-10-11 01:05:48 Number of iterations: 300, loss: 0.00010, lr: 1e-05
+2024-10-11 01:05:55 Epoch 176/200 (lr=1e-05), train loss 0.00033
+2024-10-11 01:06:15 Number of iterations: 100, loss: 0.00017, lr: 1e-05
+2024-10-11 01:06:37 Number of iterations: 200, loss: 0.00016, lr: 1e-05
+2024-10-11 01:06:56 Number of iterations: 300, loss: 0.00061, lr: 1e-05
+2024-10-11 01:07:04 Epoch 177/200 (lr=1e-05), train loss 0.00036
+2024-10-11 01:07:23 Number of iterations: 100, loss: 0.00050, lr: 1e-05
+2024-10-11 01:07:42 Number of iterations: 200, loss: 0.00016, lr: 1e-05
+2024-10-11 01:08:02 Number of iterations: 300, loss: 0.00077, lr: 1e-05
+2024-10-11 01:08:11 Epoch 178/200 (lr=1e-05), train loss 0.00033
+2024-10-11 01:08:32 Number of iterations: 100, loss: 0.00027, lr: 1e-05
+2024-10-11 01:08:51 Number of iterations: 200, loss: 0.00043, lr: 1e-05
+2024-10-11 01:09:10 Number of iterations: 300, loss: 0.00009, lr: 1e-05
+2024-10-11 01:09:18 Epoch 179/200 (lr=1e-05), train loss 0.00033
+2024-10-11 01:09:37 Number of iterations: 100, loss: 0.00009, lr: 1e-05
+2024-10-11 01:09:56 Number of iterations: 200, loss: 0.00072, lr: 1e-05
+2024-10-11 01:10:14 Number of iterations: 300, loss: 0.00025, lr: 1e-05
+2024-10-11 01:10:22 Training for epoch 180 done, starting evaluation
+2024-10-11 01:10:24 Epoch 180 performance:
+2024-10-11 01:10:24 metrics/test.rmse:  4.102
+2024-10-11 01:10:24 metrics/test.rmse_pcutoff:4.102
+2024-10-11 01:10:24 metrics/test.mAP:   73.462
+2024-10-11 01:10:24 metrics/test.mAR:   81.111
+2024-10-11 01:10:24 metrics/test.rmse_detections:4.102
+2024-10-11 01:10:24 metrics/test.rmse_detections_pcutoff:4.102
+2024-10-11 01:10:24 Epoch 180/200 (lr=1e-05), train loss 0.00033, valid loss 0.00241
+2024-10-11 01:10:45 Number of iterations: 100, loss: 0.00055, lr: 1e-05
+2024-10-11 01:11:02 Number of iterations: 200, loss: 0.00007, lr: 1e-05
+2024-10-11 01:11:21 Number of iterations: 300, loss: 0.00032, lr: 1e-05
+2024-10-11 01:11:29 Epoch 181/200 (lr=1e-05), train loss 0.00034
+2024-10-11 01:11:49 Number of iterations: 100, loss: 0.00011, lr: 1e-05
+2024-10-11 01:12:07 Number of iterations: 200, loss: 0.00016, lr: 1e-05
+2024-10-11 01:12:26 Number of iterations: 300, loss: 0.00034, lr: 1e-05
+2024-10-11 01:12:33 Epoch 182/200 (lr=1e-05), train loss 0.00037
+2024-10-11 01:12:52 Number of iterations: 100, loss: 0.00008, lr: 1e-05
+2024-10-11 01:13:12 Number of iterations: 200, loss: 0.00027, lr: 1e-05
+2024-10-11 01:13:31 Number of iterations: 300, loss: 0.00035, lr: 1e-05
+2024-10-11 01:13:38 Epoch 183/200 (lr=1e-05), train loss 0.00031
+2024-10-11 01:13:58 Number of iterations: 100, loss: 0.00015, lr: 1e-05
+2024-10-11 01:14:16 Number of iterations: 200, loss: 0.00023, lr: 1e-05
+2024-10-11 01:14:37 Number of iterations: 300, loss: 0.00068, lr: 1e-05
+2024-10-11 01:14:45 Epoch 184/200 (lr=1e-05), train loss 0.00034
+2024-10-11 01:15:03 Number of iterations: 100, loss: 0.00076, lr: 1e-05
+2024-10-11 01:15:24 Number of iterations: 200, loss: 0.00102, lr: 1e-05
+2024-10-11 01:15:44 Number of iterations: 300, loss: 0.00020, lr: 1e-05
+2024-10-11 01:15:51 Epoch 185/200 (lr=1e-05), train loss 0.00032
+2024-10-11 01:16:10 Number of iterations: 100, loss: 0.00013, lr: 1e-05
+2024-10-11 01:16:29 Number of iterations: 200, loss: 0.00014, lr: 1e-05
+2024-10-11 01:16:47 Number of iterations: 300, loss: 0.00010, lr: 1e-05
+2024-10-11 01:16:54 Epoch 186/200 (lr=1e-05), train loss 0.00034
+2024-10-11 01:17:13 Number of iterations: 100, loss: 0.00011, lr: 1e-05
+2024-10-11 01:17:33 Number of iterations: 200, loss: 0.00015, lr: 1e-05
+2024-10-11 01:17:53 Number of iterations: 300, loss: 0.00023, lr: 1e-05
+2024-10-11 01:18:00 Epoch 187/200 (lr=1e-05), train loss 0.00031
+2024-10-11 01:18:19 Number of iterations: 100, loss: 0.00016, lr: 1e-05
+2024-10-11 01:18:39 Number of iterations: 200, loss: 0.00013, lr: 1e-05
+2024-10-11 01:18:59 Number of iterations: 300, loss: 0.00019, lr: 1e-05
+2024-10-11 01:19:06 Epoch 188/200 (lr=1e-05), train loss 0.00032
+2024-10-11 01:19:26 Number of iterations: 100, loss: 0.00023, lr: 1e-05
+2024-10-11 01:19:46 Number of iterations: 200, loss: 0.00011, lr: 1e-05
+2024-10-11 01:20:06 Number of iterations: 300, loss: 0.00051, lr: 1e-05
+2024-10-11 01:20:13 Epoch 189/200 (lr=1e-05), train loss 0.00032
+2024-10-11 01:20:32 Number of iterations: 100, loss: 0.00021, lr: 1e-05
+2024-10-11 01:20:51 Number of iterations: 200, loss: 0.00034, lr: 1e-05
+2024-10-11 01:21:10 Number of iterations: 300, loss: 0.00014, lr: 1e-05
+2024-10-11 01:21:18 Training for epoch 190 done, starting evaluation
+2024-10-11 01:21:20 Epoch 190 performance:
+2024-10-11 01:21:20 metrics/test.rmse:  4.117
+2024-10-11 01:21:20 metrics/test.rmse_pcutoff:4.117
+2024-10-11 01:21:20 metrics/test.mAP:   74.279
+2024-10-11 01:21:20 metrics/test.mAR:   82.222
+2024-10-11 01:21:20 metrics/test.rmse_detections:4.117
+2024-10-11 01:21:20 metrics/test.rmse_detections_pcutoff:4.117
+2024-10-11 01:21:20 Epoch 190/200 (lr=1e-06), train loss 0.00032, valid loss 0.00244
+2024-10-11 01:21:40 Number of iterations: 100, loss: 0.00063, lr: 1e-06
+2024-10-11 01:21:58 Number of iterations: 200, loss: 0.00013, lr: 1e-06
+2024-10-11 01:22:17 Number of iterations: 300, loss: 0.00028, lr: 1e-06
+2024-10-11 01:22:25 Epoch 191/200 (lr=1e-06), train loss 0.00033
+2024-10-11 01:22:44 Number of iterations: 100, loss: 0.00014, lr: 1e-06
+2024-10-11 01:23:04 Number of iterations: 200, loss: 0.00017, lr: 1e-06
+2024-10-11 01:23:24 Number of iterations: 300, loss: 0.00075, lr: 1e-06
+2024-10-11 01:23:31 Epoch 192/200 (lr=1e-06), train loss 0.00032
+2024-10-11 01:23:49 Number of iterations: 100, loss: 0.00026, lr: 1e-06
+2024-10-11 01:24:09 Number of iterations: 200, loss: 0.00059, lr: 1e-06
+2024-10-11 01:24:28 Number of iterations: 300, loss: 0.00015, lr: 1e-06
+2024-10-11 01:24:36 Epoch 193/200 (lr=1e-06), train loss 0.00032
+2024-10-11 01:24:55 Number of iterations: 100, loss: 0.00016, lr: 1e-06
+2024-10-11 01:25:14 Number of iterations: 200, loss: 0.00096, lr: 1e-06
+2024-10-11 01:25:32 Number of iterations: 300, loss: 0.00016, lr: 1e-06
+2024-10-11 01:25:39 Epoch 194/200 (lr=1e-06), train loss 0.00031
+2024-10-11 01:25:59 Number of iterations: 100, loss: 0.00036, lr: 1e-06
+2024-10-11 01:26:18 Number of iterations: 200, loss: 0.00039, lr: 1e-06
+2024-10-11 01:26:39 Number of iterations: 300, loss: 0.00011, lr: 1e-06
+2024-10-11 01:26:47 Epoch 195/200 (lr=1e-06), train loss 0.00033
+2024-10-11 01:27:05 Number of iterations: 100, loss: 0.00041, lr: 1e-06
+2024-10-11 01:27:23 Number of iterations: 200, loss: 0.00050, lr: 1e-06
+2024-10-11 01:27:42 Number of iterations: 300, loss: 0.00012, lr: 1e-06
+2024-10-11 01:27:50 Epoch 196/200 (lr=1e-06), train loss 0.00032
+2024-10-11 01:28:10 Number of iterations: 100, loss: 0.00056, lr: 1e-06
+2024-10-11 01:28:28 Number of iterations: 200, loss: 0.00012, lr: 1e-06
+2024-10-11 01:28:46 Number of iterations: 300, loss: 0.00024, lr: 1e-06
+2024-10-11 01:28:53 Epoch 197/200 (lr=1e-06), train loss 0.00030
+2024-10-11 01:29:14 Number of iterations: 100, loss: 0.00018, lr: 1e-06
+2024-10-11 01:29:34 Number of iterations: 200, loss: 0.00026, lr: 1e-06
+2024-10-11 01:29:54 Number of iterations: 300, loss: 0.00010, lr: 1e-06
+2024-10-11 01:30:01 Epoch 198/200 (lr=1e-06), train loss 0.00030
+2024-10-11 01:30:22 Number of iterations: 100, loss: 0.00048, lr: 1e-06
+2024-10-11 01:30:42 Number of iterations: 200, loss: 0.00039, lr: 1e-06
+2024-10-11 01:31:03 Number of iterations: 300, loss: 0.00041, lr: 1e-06
+2024-10-11 01:31:11 Epoch 199/200 (lr=1e-06), train loss 0.00032
+2024-10-11 01:31:32 Number of iterations: 100, loss: 0.00014, lr: 1e-06
+2024-10-11 01:31:50 Number of iterations: 200, loss: 0.00014, lr: 1e-06
+2024-10-11 01:32:10 Number of iterations: 300, loss: 0.00011, lr: 1e-06
+2024-10-11 01:32:18 Training for epoch 200 done, starting evaluation
+2024-10-11 01:32:20 Epoch 200 performance:
+2024-10-11 01:32:20 metrics/test.rmse:  4.115
+2024-10-11 01:32:20 metrics/test.rmse_pcutoff:4.115
+2024-10-11 01:32:20 metrics/test.mAP:   75.204
+2024-10-11 01:32:20 metrics/test.mAR:   82.778
+2024-10-11 01:32:20 metrics/test.rmse_detections:4.115
+2024-10-11 01:32:20 metrics/test.rmse_detections_pcutoff:4.115
+2024-10-11 01:32:20 Epoch 200/200 (lr=1e-06), train loss 0.00031, valid loss 0.00243

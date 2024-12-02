@@ -1,0 +1,22 @@
+all_joints:
+- - 0
+- - 1
+- - 2
+- - 3
+- - 4
+- - 5
+all_joints_names:
+- head
+- spine1
+- spine2
+- tail
+- feet1
+- feet2
+dataset: training-datasets/iteration-0/UnaugmentedDataSet_20_videos_0603Oct10/20_videos_0603_RW95shuffle1.mat
+global_scale: 0.8
+init_weights: /home/hice1/rwang753/anaconda3/envs/DEEPLABCUT/lib/python3.10/site-packages/deeplabcut
+location_refinement: true
+locref_stdev: 7.2801
+net_type: resnet_50
+num_joints: 6
+scoremap_dir: test
