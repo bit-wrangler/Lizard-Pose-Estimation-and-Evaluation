@@ -1,0 +1,128 @@
+# Project definitions (do not edit)
+Task: 20_videos_0603
+scorer: RW
+date: Oct10
+multianimalproject: false
+identity:
+
+
+# Project path (change when moving around)
+project_path: /storage/ice1/0/2/rwang753/week8/20_videos_0603-RW-2024-10-10
+
+
+# Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
+engine: pytorch
+
+
+# Annotation data set configuration (and individual video cropping parameters)
+video_sets:
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0535_1.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0535_2.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0535_3.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0539_1.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0539_2.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0539_3.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0544_1.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0544_2.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0544_3.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0690_1.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0690_2.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0690_3.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0691_1.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0691_2.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0691_3.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0728_1.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0728_2.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0728_3.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0729_1.MP4:
+    crop: 0, 1080, 0, 1920
+  /Users/ruiqingwang/Downloads/Mission/GA/research/week8/test4/20_videos_0603-RW-2024-10-10/videos/0729_2.MP4:
+    crop: 0, 1080, 0, 1920
+bodyparts:
+- head
+- spine1
+- spine2
+- tail
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+- feet1
+- feet2
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+start: 0
+stop: 1
+numframes2pick: 20
+
+
+# Plotting configuration
+skeleton:
+- - head
+  - spine1
+- - tail
+  - spine2
+skeleton_color: black
+pcutoff: 0.6
+dotsize: 12
+alphavalue: 0.7
+colormap: rainbow
+
+
+# Training,Evaluation and Analysis configuration
+TrainingFraction:
+- 0.95
+iteration: 0
+default_net_type: resnet_50
+default_augmenter: default
+snapshotindex: -1
+detector_snapshotindex: -1
+batch_size: 8
+detector_batch_size: 1
+
+
+# Cropping Parameters (for analysis and outlier frame detection)
+cropping: false
+#if cropping is true for analysis, then set the values here:
+x1: 0
+x2: 640
+y1: 277
+y2: 624
+
+
+# Refinement configuration (parameters from annotation dataset configuration also relevant in this stage)
+corner2move2:
+- 50
+- 50
+move2corner: true
+
+
+# Conversion tables to fine-tune SuperAnimal weights
+SuperAnimalConversionTables:
