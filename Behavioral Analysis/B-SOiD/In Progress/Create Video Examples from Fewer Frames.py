@@ -18,3 +18,4 @@ for i, file_name in enumerate(files[:9900]):
     shutil.copy2(source_file, target_file)
 
 print("Copying completed.")
+

@@ -19,7 +19,7 @@ def organize_mp4_files(base_dir):
                     print(f"Moved {file} to {motif_folder_path}")
 
 # Run Function
-base_directory = r"C:/Users/Username/OneDrive/Documents/VAME/data/lizard project-Nov27-2024/results"
+base_directory = r"C:/Users/Username/VAME/data/lizard project-Nov27-2024/results"
 organize_mp4_files(base_directory)
 
 # Source: ChatGPT
