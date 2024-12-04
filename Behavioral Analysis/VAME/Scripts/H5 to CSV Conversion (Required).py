@@ -21,5 +21,3 @@ def convert_h5_to_csv(directory_path):
 # Call Function
 directory_path = 'C:/Users/Username/VAME/data'
 convert_h5_to_csv(directory_path)
-
-# Source: Chat GPT + Previous Script

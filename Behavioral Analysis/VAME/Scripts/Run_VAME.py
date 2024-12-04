@@ -61,4 +61,3 @@ vame.gif(config, pose_ref_index=[0,4], subtract_background=False, start=None, pa
          length=100, max_lag=30, label='motif', file_format='.mp4', crop_size=(200,200))
 
 # Source: VAME Documentation at https://ethoml.github.io/VAME/docs/getting_started/running
-# Source: ChatGPT

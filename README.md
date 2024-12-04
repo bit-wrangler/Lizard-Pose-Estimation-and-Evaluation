@@ -39,3 +39,11 @@ B-SOiD (Behavioral Segmentation of Open-field In Deep Learning) allows users to 
 ## VAME
 
 VAME (Video-based Animal Motion Estimation) finds patterns in animal movement with a focus on finding repetitive behaviors. Like B-SOiD, VAME uses pose estimation files from a program like DeepLabCut to identify motifs in animal behavior. VAME first aligns pose estimation data egocentrically and splits the data into fixed-length time windows. Next, it uses a bi-directional recurrent neural network (biRNN) with an encoder-decoder architecture within a Variational Autoencoder (VAE) framework to learn latent representations of the data. After that, both reconstruction and prediction decoders are used to ensure that the latent space captures both reconstruction and prediction. The data is then embedded into the final latent space, and a Hidden Markov Model (HMM) is used to segment the latent space into behavioral motifs.
+
+## Sources
+
+(1) DLC: https://github.com/DeepLabCut/DeepLabCut
+(2) BSOID: https://github.com/YttriLab/B-SOID 
+(3) VAME: https://github.com/EthoML/VAME
+(4) VAME (Deprecated!): https://github.com/LINCellularNeuroscience/VAME 
+Note: Please note that ChatGPT, Google SGE, or other generative AI tools have been used to help write this code.

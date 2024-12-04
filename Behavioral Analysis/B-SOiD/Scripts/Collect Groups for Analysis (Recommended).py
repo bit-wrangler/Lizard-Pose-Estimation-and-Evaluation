@@ -29,5 +29,3 @@ def organize_gif_files(base_dir):
 # Run Function
 base_directory = r"C:\Users\Username\Path\to\File\Bsoid\control\mp4s"
 organize_gif_files(base_directory)
-
-# Source: ChatGPT

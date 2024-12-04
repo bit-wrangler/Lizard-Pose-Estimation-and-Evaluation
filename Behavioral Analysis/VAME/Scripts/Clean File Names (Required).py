@@ -11,5 +11,3 @@ for file_path in working_directory.glob("*.mp4"):
         new_name = file_path.name.replace("_p60_labeled", "")
         new_file_path = file_path.with_name(new_name)
         file_path.rename(new_file_path)
-
-# Source: ChatGPT
