@@ -1,5 +1,7 @@
 # Lizard-Pose-Estimation-and-Evaluation
 
+# TODO: Rewrite pretty much all of this...
+
 ## DLC 
 DeepLabCut is an open-source, deep learning-based tool designed for precise, markerless pose estimation of user-defined body parts across various species and behaviors. Developed by Mathis[1] in 2018, it utilizes transfer learning to fine-tune deep neural networks on limited datasets, enabling accurate tracking without the need for physical markers. This approach facilitates the study of complex motor behaviors in naturalistic settings, offering a significant advantage over traditional marker-based systems.
 

@@ -1,0 +1,20 @@
+name: DEEPLABCUT
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - ipython
+  - jupyter
+  - nb_conda
+  - notebook<7.0.0
+  - ffmpeg
+  - h5py
+  - imageio
+  - pytables==3.8.0
+  - pyarrow
+  - pip:
+    - torch
+    - torchvision
+    - deeplabcut[gui,modelzoo,wandb]==3.0.0rc8
