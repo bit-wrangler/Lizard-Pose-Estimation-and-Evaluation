@@ -20,3 +20,11 @@ This script provides a GUI for annotating events (like foot/hand placement) in v
 ## quick_label.py
 
 This script provides a GUI for quickly annotating bounding boxes for object detection. It also provides the ability to retrain a detection model on the annotated data. It trains a Faster R-CNN model on the annotated data and saves the model to `fine_tuned_detector.pth`, which can then be used for inference in `videoeventannotatorapp.py` and some other apps.
+
+## stride_length_calc.py
+
+This script calculates the stride length of the lizard based on the annotated events.
+
+## spinal_undulation_calc.py
+
+This script calculates the spinal undulation of the lizard based on the annotated events.
