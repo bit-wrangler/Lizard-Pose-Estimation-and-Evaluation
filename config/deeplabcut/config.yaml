@@ -1,0 +1,181 @@
+SuperAnimalConversionTables: null
+Task: test1
+TrainingFraction:
+- 0.75
+alphavalue: 0.7
+batch_size: 16
+bodyparts:
+- snout
+- base_of_head
+- left_shoulder
+- right_shoulder
+- spine1
+- spine6
+- spine2
+- spine3
+- spine4
+- spine5
+- left_hip
+- right_hip
+- tail1
+- tail6
+- tail2
+- tail3
+- tail4
+- tail5
+- left_elbow
+- left_wrist
+- right_elbow
+- right_wrist
+- left_knee
+- left_ankle
+- right_knee
+- right_ankle
+colormap: rainbow
+corner2move2:
+- 50
+- 50
+cropping: false
+date: May21
+default_augmenter: default
+default_net_type: resnet_50
+detector_batch_size: 1
+detector_snapshotindex: -1
+dotsize: 3
+engine: pytorch
+identity: null
+iteration: 0
+move2corner: true
+multianimalproject: false
+numframes2pick: 20
+pcutoff: 0.6
+project_path: /home/alek/projects/cdl-test1/data/cdl-projects/test1-haag-2025-05-21
+scorer: haag
+skeleton:
+- - right_shoulder
+  - spine1
+- - tail4
+  - tail5
+- - spine1
+  - spine2
+- - left_knee
+  - left_ankle
+- - spine6
+  - left_hip
+- - spine4
+  - spine5
+- - tail6
+  - tail5
+- - left_elbow
+  - left_wrist
+- - spine6
+  - spine5
+- - tail2
+  - tail3
+- - spine6
+  - tail1
+- - snout
+  - base_of_head
+- - left_shoulder
+  - spine1
+- - spine2
+  - spine3
+- - right_knee
+  - right_ankle
+- - tail3
+  - tail4
+- - tail1
+  - tail2
+- - right_elbow
+  - right_wrist
+- - spine6
+  - right_hip
+- - right_shoulder
+  - right_elbow
+- - base_of_head
+  - spine1
+- - left_shoulder
+  - left_elbow
+- - right_hip
+  - right_knee
+- - left_hip
+  - left_knee
+- - spine3
+  - spine4
+skeleton_color: black
+snapshotindex: -1
+start: 0
+stop: 1
+video_sets:
+  /home/alek/ml_data/lizard-movement/05_17_2024/0002_2.MP4:
+    crop: 0, 1920, 315, 656
+  /home/alek/ml_data/lizard-movement/05_17_2024/0002_3.MP4:
+    crop: 0, 1920, 308, 649
+  /home/alek/ml_data/lizard-movement/05_17_2024/0079_1.MP4:
+    crop: 0, 1920, 296, 637
+  /home/alek/ml_data/lizard-movement/05_17_2024/0079_2.MP4:
+    crop: 0, 1920, 310, 651
+  /home/alek/ml_data/lizard-movement/05_17_2024/0082_2.MP4:
+    crop: 0, 1920, 307, 648
+  /home/alek/ml_data/lizard-movement/05_17_2024/0102_2.MP4:
+    crop: 0, 1920, 313, 654
+  /home/alek/ml_data/lizard-movement/05_17_2024/0113_2.MP4:
+    crop: 0, 1920, 304, 645
+  /home/alek/ml_data/lizard-movement/05_17_2024/0116_2.MP4:
+    crop: 0, 1920, 324, 665
+  /home/alek/ml_data/lizard-movement/05_17_2024/0123_1.MP4:
+    crop: 0, 1920, 307, 648
+  /home/alek/ml_data/lizard-movement/05_17_2024/0128_2.MP4:
+    crop: 0, 1920, 301, 642
+  /home/alek/ml_data/lizard-movement/05_17_2024/0160_2.MP4:
+    crop: 0, 1920, 327, 668
+  /home/alek/ml_data/lizard-movement/05_17_2024/0167_2.MP4:
+    crop: 0, 1920, 304, 645
+  /home/alek/ml_data/lizard-movement/05_18_2024/0052_1.MP4:
+    crop: 0, 1920, 268, 609
+  /home/alek/ml_data/lizard-movement/05_18_2024/0127_2.MP4:
+    crop: 0, 1920, 294, 635
+  /home/alek/ml_data/lizard-movement/05_18_2024/0137_1.MP4:
+    crop: 0, 1920, 294, 635
+  /home/alek/ml_data/lizard-movement/05_18_2024/0148_3.MP4:
+    crop: 0, 1920, 307, 648
+  /home/alek/ml_data/lizard-movement/05_20_2024/0130_1.MP4:
+    crop: 0, 1920, 300, 641
+  /home/alek/ml_data/lizard-movement/05_20_2024/0179_2.MP4:
+    crop: 0, 1920, 285, 626
+  /home/alek/ml_data/lizard-movement/05_20_2024/0217_1.MP4:
+    crop: 0, 1920, 292, 633
+  /home/alek/ml_data/lizard-movement/05_20_2024/0219_1.MP4:
+    crop: 0, 1920, 289, 630
+  /home/alek/ml_data/lizard-movement/05_20_2024/0248_2.MP4:
+    crop: 0, 1920, 299, 640
+  /home/alek/ml_data/lizard-movement/05_20_2024/0297_2.MP4:
+    crop: 0, 1920, 289, 630
+  /home/alek/ml_data/lizard-movement/5_21_2024/0262_1.MP4:
+    crop: 0, 1920, 308, 649
+  /home/alek/ml_data/lizard-movement/5_21_2024/0369_2.MP4:
+    crop: 0, 1920, 284, 625
+  /home/alek/ml_data/lizard-movement/5_22_2024/0401_2.MP4:
+    crop: 0, 1920, 198, 539
+  /home/alek/ml_data/lizard-movement/5_22_2024/0425_1.MP4:
+    crop: 0, 1920, 197, 538
+  /home/alek/ml_data/lizard-movement/5_22_2024/0425_3.MP4:
+    crop: 0, 1920, 201, 542
+  /home/alek/ml_data/lizard-movement/5_22_2024/0425_messup.MP4:
+    crop: 0, 1920, 220, 561
+  /home/alek/ml_data/lizard-movement/5_22_2024/0435_2.MP4:
+    crop: 0, 1920, 214, 555
+  /home/alek/ml_data/lizard-movement/5_22_2024/0495_3.MP4:
+    crop: 0, 1920, 196, 537
+  /home/alek/ml_data/lizard-movement/5_28_2024/0772_3.MP4:
+    crop: 0, 1920, 214, 555
+  /home/alek/ml_data/lizard-movement/5_29_2024/0680_2 (1).MP4:
+    crop: 0, 1920, 215, 556
+  /home/alek/ml_data/lizard-movement/5_29_2024/0680_3 (1).MP4:
+    crop: 0, 1920, 225, 566
+  /home/alek/ml_data/lizard-movement/5_29_2024/0680_3.MP4:
+    crop: 0, 1920, 190, 531
+x1: 0
+x2: 1920
+y1: 300
+y2: 880
