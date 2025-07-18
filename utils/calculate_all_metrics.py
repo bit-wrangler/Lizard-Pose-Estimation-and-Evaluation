@@ -150,10 +150,9 @@ def get_limb_stride_length(
     event_peaks = np.sort(event_peaks)
     # find the distance between consecutive peaks
     distances = np.linalg.norm(limb_position_data[event_peaks[1:], :2] - limb_position_data[event_peaks[:-1], :2], axis=1)
-    distances = distances / SCALE
     confidences = limb_position_data[event_peaks[1:], 2] * limb_position_data[event_peaks[:-1], 2]
     valid_mask = confidences > min_confidence_pos
-    valid_mask = valid_mask & (distances > 0.01) & (distances < body_length * 6.0)
+    valid_mask = valid_mask & (distances / SCALE > 10.0) & (distances < body_length * 6.0)
     return distances[valid_mask].max() if np.any(valid_mask) else None
     
 def get_stride_length(
@@ -202,7 +201,7 @@ def get_undulation_amplitude(
     spine1_position_data = position_data[:, SPINE1, :]
     spine3_position_data = position_data[:, SPINE3, :]
     spine4_position_data = position_data[:, SPINE4, :]
-    spine6_position_data = position_data[:, SPINE5, :]
+    spine6_position_data = position_data[:, SPINE6, :]
 
     t = np.linspace(0, spine1_position_data.shape[0] / FPS, spine1_position_data.shape[0])
     spine1_valid_mask = spine1_position_data[:, 2] > min_confidence_pos
@@ -307,7 +306,7 @@ if __name__ == "__main__":
     df.sort_values(by='lizard_id', inplace=True)
     df.to_csv('all_metrics.csv', index=False)
 
-    exit()
+    # exit()
 
     plt.hist(all_lengths, bins=50)
     plt.title('Lizard Length')
